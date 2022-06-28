@@ -14,6 +14,7 @@ class employee extends Model
 'lastname',
 'email',
 'phonenumber',
-'image'
+'image',
+'team_id'
     ];
 }

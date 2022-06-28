@@ -66,23 +66,24 @@ return $employee;
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+ 
+
     {
+        $this->validate($request,[
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+        ]);
+//updating stuff with fucking image
         $post=Employee::find($id);
         $post->update(["firstname"=>$request->input('firstname'),
         "lastname"=>$request->input('lastname'),
         "email"=>$request->input('email'),
         "phonenumber"=>$request->input('phonenumber'),
-        "image"=>$request->file('image')->store('/images'),
-//         $getImage = $request->image;
-// $image = $request->file('image');
-// $imageName =$image->getClientOriginalName(); 
-// $imagePath =$image->store('/images');
-// $employee->image = $imageName;
-// $getImage->move($imagePath, $imageName);
-    
-    
-    
+        "image"=>$request->file('image')->move($request->image->store('/images'),$request->image->getclientoriginalname()),
+        "team_id"=>$request->input('team_id'),
     ]);
+    $image = $request->file('image');
+    $imageName =$image->getClientOriginalName(); 
+    $post->image = $imageName;
         return $post;
     }
 
