@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\employee;
+use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return employee::all();
+        return Employee::all();
     }
 
     /**
@@ -25,12 +25,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-$employee=new employee();
+$employee=new Employee();
 $employee->firstname=$request->input('firstname');
 $employee->lastname=$request->input('lastname');
 $employee->email=$request->input('email');
 $employee->phonenumber=$request->input('phonenumber');
-$employee->image=$request->file('image')->store('ERP-BACKEND/public/images');
+$employee->image=$request->file('image')->store('/public/images');
 $employee->save();
 return $employee;
 
@@ -44,7 +44,7 @@ return $employee;
      */
     public function show($id)
     {
-        return employee::find($id);
+        return Employee::find($id);
     }
 
     /**
@@ -56,7 +56,7 @@ return $employee;
      */
     public function update(Request $request, $id)
     {
-        $post=employee::find($id);
+        $post=Employee::find($id);
         $post->update(["firstname"=>$request->input('firstname'),
         "lastname"=>$request->input('lastname'),
         "email"=>$request->input('email'),
@@ -74,6 +74,6 @@ return $employee;
      */
     public function destroy($id)
     {
-        return employee::destroy($id);
+        return Employee::destroy($id);
     }
 }
