@@ -16,9 +16,10 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::resource('/employees',EmployeeController::class);
 
         });
+        Route::resource('/employees',EmployeeController::class);
+
 
         Route::get('/get', [AuthController::class, 'get']);
         Route::post('/register', [AuthController::class, 'register']);

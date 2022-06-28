@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
-
 class EmployeeController extends Controller
 {
     /**
@@ -24,13 +23,25 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    
     {
+        $this->validate($request,[
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+        ]);
+
 $employee=new Employee();
 $employee->firstname=$request->input('firstname');
 $employee->lastname=$request->input('lastname');
 $employee->email=$request->input('email');
 $employee->phonenumber=$request->input('phonenumber');
-$employee->image=$request->file('image')->store('/public/images');
+//image upload 
+$getImage = $request->image;
+$image = $request->file('image');
+$imageName =$image->getClientOriginalName(); 
+$imagePath =$image->store('/images');
+$employee->image = $imageName;
+$getImage->move($imagePath, $imageName);
+
 $employee->save();
 return $employee;
 
@@ -61,7 +72,17 @@ return $employee;
         "lastname"=>$request->input('lastname'),
         "email"=>$request->input('email'),
         "phonenumber"=>$request->input('phonenumber'),
-        "image"=>$request->file('image')->store('images'),]);
+        "image"=>$request->file('image')->store('/images'),
+//         $getImage = $request->image;
+// $image = $request->file('image');
+// $imageName =$image->getClientOriginalName(); 
+// $imagePath =$image->store('/images');
+// $employee->image = $imageName;
+// $getImage->move($imagePath, $imageName);
+    
+    
+    
+    ]);
         return $post;
     }
 
