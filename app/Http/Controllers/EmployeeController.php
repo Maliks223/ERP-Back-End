@@ -24,16 +24,27 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-$employee=new Employee();
-$employee->firstname=$request->input('firstname');
-$employee->lastname=$request->input('lastname');
-$employee->email=$request->input('email');
-$employee->phonenumber=$request->input('phonenumber');
-$employee->image=$request->file('image')->store('/public/images');
-$employee->save();
-return $employee;
 
+    {
+        $this->validate($request, [
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+        ]);
+
+        $employee = new Employee();
+        $employee->firstname = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->email = $request->input('email');
+        $employee->phonenumber = $request->input('phonenumber');
+        //image upload 
+        $getImage = $request->image;
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $imagePath = $image->store('/images');
+        $employee->image = $imageName;
+        $getImage->move($imagePath, $imageName);
+
+        $employee->save();
+        return $employee;
     }
 
     /**
@@ -55,13 +66,25 @@ return $employee;
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+
+
     {
-        $post=Employee::find($id);
-        $post->update(["firstname"=>$request->input('firstname'),
-        "lastname"=>$request->input('lastname'),
-        "email"=>$request->input('email'),
-        "phonenumber"=>$request->input('phonenumber'),
-        "image"=>$request->file('image')->store('images'),]);
+        $this->validate($request, [
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+        ]);
+        //updating stuff with fucking image
+        $post = Employee::find($id);
+        $post->update([
+            "firstname" => $request->input('firstname'),
+            "lastname" => $request->input('lastname'),
+            "email" => $request->input('email'),
+            "phonenumber" => $request->input('phonenumber'),
+            "image" => $request->file('image')->move($request->image->store('/images'), $request->image->getclientoriginalname()),
+            "team_id" => $request->input('team_id'),
+        ]);
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $post->image = $imageName;
         return $post;
     }
 
