@@ -33,5 +33,3 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::resource('student', StudentController::class);
