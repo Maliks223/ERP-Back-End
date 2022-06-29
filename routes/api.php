@@ -4,11 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
-<<<<<<< HEAD
-use App\Http\Controllers\TeamController;
-=======
 use App\Http\Controllers\KPIController;
->>>>>>> dev
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,17 +17,11 @@ use App\Http\Controllers\KPIController;
 */
 
 
-<<<<<<< HEAD
-        });
-        Route::resource('/employees',EmployeeController::class);
-        Route::resource('/teams',TeamController::class);
-=======
 
 Route::get('/get', [AuthController::class, 'get']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
->>>>>>> dev
 
 
 Route::resource('/employees', EmployeeController::class);
