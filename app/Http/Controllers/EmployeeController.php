@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Team;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +15,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return Employee::all();
+        $emplo= Employee::with('teams')->get();;
+        return $emplo;
     }
 
     /**
@@ -35,6 +37,7 @@ class EmployeeController extends Controller
         $employee->lastname = $request->input('lastname');
         $employee->email = $request->input('email');
         $employee->phonenumber = $request->input('phonenumber');
+        $employee->team_id = $request->input('team_id');
         //image upload 
         $getImage = $request->image;
         $image = $request->file('image');
@@ -44,7 +47,7 @@ class EmployeeController extends Controller
         $getImage->move($imagePath, $imageName);
 
         $employee->save();
-        return $employee;
+        return $employee::with('teams')->get();
     }
 
     /**
