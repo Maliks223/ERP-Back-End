@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,8 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::resource('/project',ProjectController::class);
+
 
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('/employees',EmployeeController::class);
@@ -30,5 +33,3 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::resource('student', StudentController::class);
