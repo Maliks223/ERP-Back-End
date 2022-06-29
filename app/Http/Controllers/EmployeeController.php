@@ -25,15 +25,14 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-$employee=new Employee();
-$employee->firstname=$request->input('firstname');
-$employee->lastname=$request->input('lastname');
-$employee->email=$request->input('email');
-$employee->phonenumber=$request->input('phonenumber');
-$employee->image=$request->file('image')->store('/public/images');
-$employee->save();
-return $employee;
-
+        $employee = new Employee();
+        $employee->firstname = $request->input('firstname');
+        $employee->lastname = $request->input('lastname');
+        $employee->email = $request->input('email');
+        $employee->phonenumber = $request->input('phonenumber');
+        $employee->image = $request->file('image')->store('/public/images');
+        $employee->save();
+        return $employee;
     }
 
     /**
@@ -56,12 +55,14 @@ return $employee;
      */
     public function update(Request $request, $id)
     {
-        $post=Employee::find($id);
-        $post->update(["firstname"=>$request->input('firstname'),
-        "lastname"=>$request->input('lastname'),
-        "email"=>$request->input('email'),
-        "phonenumber"=>$request->input('phonenumber'),
-        "image"=>$request->file('image')->store('images'),]);
+        $post = Employee::find($id);
+        $post->update([
+            "firstname" => $request->input('firstname'),
+            "lastname" => $request->input('lastname'),
+            "email" => $request->input('email'),
+            "phonenumber" => $request->input('phonenumber'),
+            "image" => $request->file('image')->store('images'),
+        ]);
         return $post;
     }
 
