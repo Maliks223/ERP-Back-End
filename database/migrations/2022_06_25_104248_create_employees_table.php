@@ -20,8 +20,10 @@ class CreateEmployeesTable extends Migration
                 $table->integer('phonenumber')->default(0);
                 $table->string('email');
                 $table->string('image')->nullable(); 
-                $table->boolean('team_id');
+                // $table->integ('team_id');
             $table->timestamps();
+            $table->foreignId('team_id')->references('id')->on('teams')->onDelete('cascade');
+
         });
     }
 

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TeamController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +20,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
         });
         Route::resource('/employees',EmployeeController::class);
+        Route::resource('/teams',TeamController::class);
 
 
         Route::get('/get', [AuthController::class, 'get']);
