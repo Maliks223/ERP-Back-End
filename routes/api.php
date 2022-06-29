@@ -2,9 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KPIController;
+use App\Http\Controllers\{
+    EmployeeController,
+    AuthController,
+    KPIController,
+    ProjectController,
+    TeamProjectController
+    };
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +21,9 @@ use App\Http\Controllers\KPIController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::resource('/project',ProjectController::class);
+Route::resource('/project',TeamProjectController::class);
+
 
 
 
