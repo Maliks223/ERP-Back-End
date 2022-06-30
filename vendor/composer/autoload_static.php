@@ -546,6 +546,7 @@ class ComposerStaticInit75f51e5ee98bf82ebf4e805de59221b1
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeController.php',
+        'App\\Http\\Controllers\\KPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/KPIController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -556,11 +557,15 @@ class ComposerStaticInit75f51e5ee98bf82ebf4e805de59221b1
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
 =======
 <<<<<<< HEAD
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
 =======
+=======
+        'App\\Models\\EmployeeKPI' => __DIR__ . '/../..' . '/app/Models/EmployeeKPI.php',
+>>>>>>> emp_kpi
         'App\\Models\\KPI' => __DIR__ . '/../..' . '/app/Models/KPI.php',
 >>>>>>> b2da2a5d2138e7b9d3f1e82fc667e06bee1803c8
 >>>>>>> dev

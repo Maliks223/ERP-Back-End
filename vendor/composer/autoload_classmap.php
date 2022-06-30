@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\EmployeeController' => $baseDir . '/app/Http/Controllers/EmployeeController.php',
+    'App\\Http\\Controllers\\KPIController' => $baseDir . '/app/Http/Controllers/KPIController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -21,11 +22,15 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'App\\Models\\Team' => $baseDir . '/app/Models/Team.php',
 =======
 <<<<<<< HEAD
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
 =======
+=======
+    'App\\Models\\EmployeeKPI' => $baseDir . '/app/Models/EmployeeKPI.php',
+>>>>>>> emp_kpi
     'App\\Models\\KPI' => $baseDir . '/app/Models/KPI.php',
 >>>>>>> b2da2a5d2138e7b9d3f1e82fc667e06bee1803c8
 >>>>>>> dev
