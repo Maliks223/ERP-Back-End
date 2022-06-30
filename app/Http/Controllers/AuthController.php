@@ -13,9 +13,10 @@ use App\Http\Middleware\JWTMiddleware;
 class AuthController extends Controller 
 {
    public $loginAfterSignUp = true;
-public function get(Request $request){
+public function index(Request $request){
     return User::all();
 }
+
 
 
   public function login(Request $request)
@@ -72,6 +73,26 @@ public function register(Request $request)
            'data'      =>  $user
        ], 200);
    }
+
+
+   public function update(Request $request ,$id)
+{ 
+    $user=User::find($id);
+    $user->update([ 
+    'name'=>$request->input('name'),
+    'email'=>$request->input('email'),
+    ]);
+  $user->save();
+  return $user;
+
+
+   
+}
+public function destroy($id)
+{
+    return User::destroy($id);
+}
+
 }
 
 

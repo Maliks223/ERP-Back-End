@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KPIController;
+use App\Http\Controllers\TeamController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,17 +17,25 @@ use App\Http\Controllers\KPIController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('users')->middleware(['auth','SuperAdmin'])->group(function(){
 
-
-
-Route::get('/get', [AuthController::class, 'get']);
+});
 Route::post('/register', [AuthController::class, 'register']);
+
+
+//user routes
+Route::get('/users', [AuthController::class, 'get']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::resource('/users', AuthController::class);
 
+//teams routes
+Route::resource('/teams', TeamController::class);
 
+//employees routes
 Route::resource('/employees', EmployeeController::class);
 
+//middleware authentication
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('/kpi', KPIController::class);
 });
