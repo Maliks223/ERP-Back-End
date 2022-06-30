@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeKPIController;
 use App\Http\Controllers\KPIController;
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::resource('employeekpi', EmployeeKPIController::class);
