@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KPIController;
 use App\Http\Controllers\TeamController;
 
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +22,8 @@ Route::prefix('users')->middleware(['auth','SuperAdmin'])->group(function(){
 
 });
 Route::post('/register', [AuthController::class, 'register']);
+Route::resource('/project',ProjectController::class);
+
 
 
 //user routes
