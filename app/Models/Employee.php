@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
 use App\Models\Role;
+use App\Models\Project;
+
+use App\Models\Employee_role;
+
 class employee extends Model
 {
     use HasFactory;
@@ -26,7 +30,11 @@ class employee extends Model
     }
     public function Roles()
     {
-        return $this->belongsToMany(Role::class, 'role_id');
+        return $this->belongsTo(Role::class,'role_id');
+    }
+    public function projects()
+    {
+        return $this->belongsTo(Project::class,'project_id');
     }
 
 }

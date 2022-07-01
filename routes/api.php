@@ -6,8 +6,10 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KPIController;
 use App\Http\Controllers\TeamController;
-
+use App\Http\Controllers\RoleController;
+// use App\Http\Controllers\EmployeeRoleController;
 use App\Http\Controllers\ProjectController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,11 +20,14 @@ use App\Http\Controllers\ProjectController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::prefix('users')->middleware(['auth','SuperAdmin'])->group(function(){
 
-});
+// Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
+// });
 Route::post('/register', [AuthController::class, 'register']);
-Route::resource('/project',ProjectController::class);
+Route::resource('/project', ProjectController::class);
+Route::resource('/roles', RoleController::class);
+// Route::resource('/employee-role', EmployeeRoleController::class);
+
 
 
 

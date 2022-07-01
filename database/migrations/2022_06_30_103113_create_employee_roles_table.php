@@ -15,6 +15,10 @@ class CreateEmployeeRolesTable extends Migration
     {
         Schema::create('employee_roles', function (Blueprint $table) {
             $table->id();
+            // $table->bigInteger('employee_id')->unsigned();
+            // $table->bigInteger('role_id')->unsigned();
+            // $table->bigInteger('project_id')->unsigned();
+
             $table->foreignId('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');

@@ -40,8 +40,9 @@ class ProjectController extends Controller
         $project->save();
 
         if($project){
-            return ["Project has been added"] ;
-     }
+            return response()->json([
+                'data'=> $project
+            ],200);     }
      else
      {
          return ["Name cannot be empty"];
