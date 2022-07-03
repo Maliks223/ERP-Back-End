@@ -17,6 +17,7 @@ class CreateEmployeeKPISTable extends Migration
             $table->bigInteger('employee_id');
             $table->bigInteger('kpi_id');
             $table->integer('rate');
+            $table->date('KPI-date');
             $table->timestamps();
         });
     }

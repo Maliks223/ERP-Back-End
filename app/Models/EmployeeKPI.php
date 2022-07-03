@@ -14,5 +14,5 @@ class EmployeeKPI extends Model
         'kpi_id',
         'rate'
     ];
-
+    
 }

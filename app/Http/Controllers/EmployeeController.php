@@ -15,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $emplo= Employee::with('teams')->get();;
+        $emplo = Employee::with('teams')->get();;
         return $emplo;
     }
 
@@ -41,10 +41,9 @@ class EmployeeController extends Controller
         //image upload 
         $getImage = $request->image;
         $image = $request->file('image');
-        $imageName = $image->getClientOriginalName();
         $imagePath = $image->store('/images');
-        $employee->image = $imageName;
-        $getImage->move($imagePath, $imageName);
+        $employee->image = $image->getClientOriginalName();
+        $getImage->move($imagePath);
 
         $employee->save();
         return $employee::with('teams')->get();

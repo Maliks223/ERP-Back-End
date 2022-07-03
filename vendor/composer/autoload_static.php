@@ -556,19 +556,10 @@ class ComposerStaticInit75f51e5ee98bf82ebf4e805de59221b1
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-<<<<<<< HEAD
-<<<<<<< HEAD
         'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
-=======
-<<<<<<< HEAD
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
-=======
-=======
         'App\\Models\\EmployeeKPI' => __DIR__ . '/../..' . '/app/Models/EmployeeKPI.php',
->>>>>>> emp_kpi
         'App\\Models\\KPI' => __DIR__ . '/../..' . '/app/Models/KPI.php',
->>>>>>> b2da2a5d2138e7b9d3f1e82fc667e06bee1803c8
->>>>>>> dev
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
