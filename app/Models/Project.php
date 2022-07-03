@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\employee;
+use App\Models\Role;
 class Project extends Model
 {
 
@@ -14,7 +14,7 @@ class Project extends Model
 
 
 
-    public function employees(){
-        return $this->belongsTo(Employee_role::class,'employee_id');
-    }
+    // public function Roles(){
+    //     return $this->belongsToMany(employeeRole::class);
+    // }
 }

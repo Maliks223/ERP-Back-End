@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Employee_role;
+use App\Models\employeeRole;
 
 class EmployeeRoleController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,11 @@ class EmployeeRoleController extends Controller
      */
     public function index()
     {
-        return Employee_role::all();
+       $emplo= employeeRole::with('Roles','employeess','projectss')->get();
+       return $emplo;
+    // $roles =employeeRole::find(1)->Roles()->orderBy('id')->get();
+    // return $roles;
+
     }
 
     /**
@@ -25,13 +30,12 @@ class EmployeeRoleController extends Controller
      */
     public function store(Request $request)
     {
-        // $role = new Employee_role();
-        // $role->project_id = $request->input('project_id');
-        // $role->employee_id = $request->input('employee_id');
-        // $role->role_id = $request->input('role_id');
-
-        // $role->save();
-        // return $role;
+        $role = new employeeRole();
+        $role->project_id = $request->input('project_id');
+        $role->employee_id = $request->input('employee_id');
+        $role->role_id = $request->input('role_id');
+        $role->save();
+        return $role;
     }
     //; ::with('employees')->where("employee_id","=",$role->id)->get()
     /**::with('Roles')->where("role_id","=",$role->id)->get();
@@ -43,7 +47,7 @@ class EmployeeRoleController extends Controller
      */
     public function show($id)
     {
-        return Employee_role::find($id);
+        return employeeRole::find($id);
     }
 
     /**
@@ -55,13 +59,13 @@ class EmployeeRoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $roleid = Employee_role::find($id);
-        // $roleid->update([
-        //     'role_id' => $request->input('role_id'),
-        //     'employee_id' => $request->input('employee_id'),
-        //     'project_id' => $request->input('project_id')
-        // ]);
-        // return $roleid;
+        $roleid = employeeRole::find($id);
+        $roleid->update([
+            'role_id' => $request->input('role_id'),
+            'employee_id' => $request->input('employee_id'),
+            'project_id' => $request->input('project_id')
+        ]);
+        return $roleid;
     }
 
     /**
@@ -72,6 +76,7 @@ class EmployeeRoleController extends Controller
      */
     public function destroy($id)
     {
-        // return Employee_role::destroy($id);
+        return employeeRole::destroy($id);
     }
+
 }

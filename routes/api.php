@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KPIController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
-// use App\Http\Controllers\EmployeeRoleController;
+use App\Http\Controllers\EmployeeRoleController;
 use App\Http\Controllers\ProjectController;
 
 /*
@@ -26,7 +26,7 @@ use App\Http\Controllers\ProjectController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::resource('/project', ProjectController::class);
 Route::resource('/roles', RoleController::class);
-// Route::resource('/employee-role', EmployeeRoleController::class);
+Route::resource('/employeerole', EmployeeRoleController::class);
 
 
 
