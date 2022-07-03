@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\KPI;
+use App\Models\Employee;
 
 class EmployeeKPI extends Model
 {
@@ -12,7 +14,8 @@ class EmployeeKPI extends Model
     protected $fillable = [
         'employee_id',
         'kpi_id',
-        'rate'
+        'rate',
+        'KPI_date'
     ];
-    
+
 }

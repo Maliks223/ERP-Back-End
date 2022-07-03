@@ -31,7 +31,6 @@ Route::resource('/teams', TeamController::class);
 Route::resource('/employees', EmployeeController::class);
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::resource('/kpi', KPIController::class);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -40,3 +39,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('employeekpi', EmployeeKPIController::class);
+
+
+Route::resource('/kpi', KPIController::class);

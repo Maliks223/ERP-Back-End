@@ -35,19 +35,32 @@ class EmployeeKPIController extends Controller
      */
     public function store(Request $request)
     {
+        // $kpi = new EmployeeKPI();
+        // $kpi->fill($request->all());
+        // if ($kpi->save()) {
+        //     return response()->json([
+        //         'data' => $kpi
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'EmployeeKPI' => 'EmployeeKPI could not be added'
+        //     ], 500);
+        // }
+
+
+        // $empKpi = new EmployeeKPI();
+        // $empKpi->employee_id = $request->input('employee_id');
+        // $empKpi->kpi_id = $request->input('kpi_id');
+        // $empKpi->rate = $request->input('rate');
+        // $empKpi->KPI-date= $request->input('KPI-date');
+
+
         $kpi = new EmployeeKPI();
         $kpi->fill($request->all());
-        if ($kpi->save()) {
-            return response()->json([
-                'data' => $kpi
-            ], 200);
-        } else {
-            return response()->json([
-                'EmployeeKPI' => 'EmployeeKPI could not be added'
-            ], 500);
-        }
-    }
+        $kpi->save();
+        return $kpi::with('employeeee', 'kpi')->get();
 
+    }
     /**
      * Display the specified resource.
      *
