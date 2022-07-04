@@ -22,7 +22,6 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
-
     'App\\Models\\KPI' => $baseDir . '/app/Models/KPI.php',
     'App\\Models\\Project' => $baseDir . '/app/Models/Project.php',
     'App\\Models\\TeamProject' => $baseDir . '/app/Models/TeamProject.php',
@@ -30,6 +29,9 @@ return array(
     'App\\Models\\Team' => $baseDir . '/app/Models/Team.php',
 
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
+    'App\\Models\\EmployeeKPI' => $baseDir . '/app/Models/EmployeeKPI.php',
+    'App\\Models\\KPI' => $baseDir . '/app/Models/KPI.php',
+
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
