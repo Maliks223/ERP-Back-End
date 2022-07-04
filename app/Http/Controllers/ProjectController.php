@@ -40,7 +40,9 @@ class ProjectController extends Controller
         $project->save();
 
         if ($project) {
-            return ["Project has been added"];
+            return response()->json([
+                'data' => $project
+            ], 200);
         } else {
             return ["Name cannot be empty"];
         }
@@ -108,10 +110,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-
-
+        // if($validator->fails()) {
+        //     return Redirect::back()->withErrors($validator);
+        // }
         $project = Project::find($id)->first();
-        if ($project->delete()) {
+        if ($project->delete()) { //returns a boolean
             return response()->json([
                 'project' => "has been deleted"
             ], 200);
@@ -120,5 +123,10 @@ class ProjectController extends Controller
                 'project' => 'operation failed'
             ], 500);
         }
+        // / $projectDelete = Project::find($project)->first();
+        // $projectDelete -> delete();
+        // return $projectDelete;
+
+
     }
 }
