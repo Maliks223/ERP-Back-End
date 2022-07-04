@@ -14,9 +14,11 @@ class CreateEmployeeKPISTable extends Migration
     public function up()
     {
         Schema::create('employee_k_p_i_s', function (Blueprint $table) {
-            $table->bigInteger('employee_id');
-            $table->bigInteger('kpi_id');
+            $table->id();
+            $table->foreignId('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreignId('kpi_id')->references('id')->on('k_p_i_s')->onDelete('cascade');
             $table->integer('rate');
+            // $table->date('KPI_date');
             $table->timestamps();
         });
     }

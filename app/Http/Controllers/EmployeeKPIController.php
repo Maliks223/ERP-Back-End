@@ -14,8 +14,11 @@ class EmployeeKPIController extends Controller
      */
     public function index()
     {
-        return EmployeeKPI::all();
+        $emp=EmployeeKPI::find(1)->employees()->kpis()->orderBy('id')->get();
+        return $emp;
     }
+    // $roles =employeeRole::find(1)->Roles()->orderBy('id')->get();
+    // return $roles;
 
     /**
      * Show the form for creating a new resource.
@@ -35,19 +38,35 @@ class EmployeeKPIController extends Controller
      */
     public function store(Request $request)
     {
-        $kpi = new EmployeeKPI();
-        $kpi->fill($request->all());
-        if ($kpi->save()) {
-            return response()->json([
-                'data' => $kpi
-            ], 200);
-        } else {
-            return response()->json([
-                'EmployeeKPI' => 'EmployeeKPI could not be added'
-            ], 500);
-        }
-    }
+        // $kpi = new EmployeeKPI();
+        // $kpi->fill($request->all());
+        // if ($kpi->save()) {
+        //     return response()->json([
+        //         'data' => $kpi
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'EmployeeKPI' => 'EmployeeKPI could not be added'
+        //     ], 500);
+        // }
 
+
+        $empKpi = new EmployeeKPI();
+        $empKpi->employee_id = $request->input('employee_id');
+        $empKpi->kpi_id = $request->input('kpi_id');
+        $empKpi->rate = $request->input('rate');
+        // $empKpi->KPI-date= $request->input('KPI-date');
+        $empKpi->save();
+        return $empKpi::with('employees','kpis')->get();
+
+
+        // $kpi = new EmployeeKPI();
+        // $kpi->fill($request->all());
+        // $kpi->save();
+        // $jaafar =  $kpi::with('employees', 'kpis')->get();
+        // return $jaafar;
+
+    }
     /**
      * Display the specified resource.
      *
@@ -56,7 +75,7 @@ class EmployeeKPIController extends Controller
      */
     public function show($employeeKPI)
     {
-        return EmployeeKPI::find($employeeKPI);
+        return EmployeeKPI::find($employeeKPI)::with('employees','kpis')->get();
     }
 
     /**

@@ -5,6 +5,7 @@ use test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
+use App\Models\KPI;
 
 
 use App\Models\Role;

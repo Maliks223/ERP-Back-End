@@ -567,6 +567,7 @@ class ComposerStaticInit75f51e5ee98bf82ebf4e805de59221b1
         'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
+        'App\\Models\\EmployeeKPI' => __DIR__ . '/../..' . '/app/Models/EmployeeKPI.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\employeeRole' => __DIR__ . '/../..' . '/app/Models/employeeRole.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

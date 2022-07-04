@@ -52,7 +52,6 @@ Route::resource('/employees', EmployeeController::class);
 
 //middleware authentication
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::resource('/kpi', KPIController::class);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -61,3 +60,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
 
 Route::resource('employeekpi', EmployeeKPIController::class);
+
+
+Route::resource('/kpi', KPIController::class);
