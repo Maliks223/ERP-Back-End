@@ -22,21 +22,14 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
-<<<<<<< HEAD
     'App\\Models\\KPI' => $baseDir . '/app/Models/KPI.php',
     'App\\Models\\Project' => $baseDir . '/app/Models/Project.php',
     'App\\Models\\TeamProject' => $baseDir . '/app/Models/TeamProject.php',
-=======
-<<<<<<< HEAD
+
     'App\\Models\\Team' => $baseDir . '/app/Models/Team.php',
-=======
-<<<<<<< HEAD
-    'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
-=======
+    'App\\Models\\EmployeeKPI' => $baseDir . '/app/Models/EmployeeKPI.php',
     'App\\Models\\KPI' => $baseDir . '/app/Models/KPI.php',
->>>>>>> b2da2a5d2138e7b9d3f1e82fc667e06bee1803c8
->>>>>>> dev
->>>>>>> 1955b9173f3be6dad7036260e40425e44fae02cb
+
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
