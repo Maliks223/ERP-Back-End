@@ -8,7 +8,7 @@ use App\Http\Controllers\KPIController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeRoleController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EmployeeKPIController;
 
 /*
 |--------------------------------------------------------------------------
