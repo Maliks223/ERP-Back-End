@@ -34,20 +34,16 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $project=new project();
-        $project->name=$request->input('name');
+    {
+        $project = new project();
+        $project->name = $request->input('name');
         $project->save();
 
-        if($project){
-            return ["Project has been added"] ;
-     }
-     else
-     {
-         return ["Name cannot be empty"];
-     }
-     
-    
+        if ($project) {
+            return ["Project has been added"];
+        } else {
+            return ["Name cannot be empty"];
+        }
     }
 
     /**
@@ -59,18 +55,15 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        if($project)
-        {
+        if ($project) {
             return response()->json([
-                'data'=> $project
-            ],200);
+                'data' => $project
+            ], 200);
+        } {
+            return response()->json([
+                'project' => ' could not be found'
+            ], 500);
         }
-        {
-        return response()->json([
-            'project'=>' could not be found' 
-        ],500);
-        }
-
     }
 
     /**
@@ -96,16 +89,14 @@ class ProjectController extends Controller
         $project = Project::find($id)->first();
         $project->update($request->all());
 
-        if($project->update()){ //returns a boolean
+        if ($project->update()) { //returns a boolean
             return response()->json([
-                'project'=> "has been updated"
-            ],200);
-        }
-        else
-        {
+                'project' => "has been updated"
+            ], 200);
+        } else {
             return response()->json([
-                'project'=>'could not be updated' 
-            ],500);
+                'project' => 'could not be updated'
+            ], 500);
         }
     }
 
@@ -115,28 +106,19 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
-        // if($validator->fails()) {
-        //     return Redirect::back()->withErrors($validator);
-        // }
-            $project = Project::find($id)->first();
-            if($project->delete()){ //returns a boolean
-                return response()->json([
-                    'project'=> "has been deleted"
-                ],200);
-            }
-            else
-            {
-                return response()->json([
-                    'project'=>'operation failed' 
-                ],500);
-            }
-        // / $projectDelete = Project::find($project)->first();
-            // $projectDelete -> delete();
-            // return $projectDelete;
-        
-        
-    }
 
+
+        $project = Project::find($id)->first();
+        if ($project->delete()) {
+            return response()->json([
+                'project' => "has been deleted"
+            ], 200);
+        } else {
+            return response()->json([
+                'project' => 'operation failed'
+            ], 500);
+        }
+    }
 }

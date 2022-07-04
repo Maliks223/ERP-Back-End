@@ -8,7 +8,7 @@ use App\Http\Controllers\{
     KPIController,
     ProjectController,
     TeamProjectController
-    };
+};
 
 
 /*
@@ -21,8 +21,10 @@ use App\Http\Controllers\{
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('/project',ProjectController::class);
-Route::resource('/project',TeamProjectController::class);
+
+Route::resource('/project', ProjectController::class);
+// Route::resource('/project', TeamProjectController::class);
+Route::resource('teamproject', TeamProjectController::class);
 
 
 

@@ -15,6 +15,10 @@ class CreateTeamProjectsTable extends Migration
     {
         Schema::create('team_projects', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('Team_id')->unsigned();
+            $table->foreign('Team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->bigInteger('Project_id')->unsigned();
+            $table->foreign('Project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

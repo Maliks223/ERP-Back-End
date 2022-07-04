@@ -14,18 +14,14 @@ class TeamProjectController extends Controller
      */
     public function index()
     {
-        //
+      $emplo=TeamProject::with('project','team')->get();
+      return $emplo;
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +31,13 @@ class TeamProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teamproject = new TeamProject();
+        $teamproject->Team_id = $request->input('Team_id');
+        $teamproject->Project_id = $request->input('Project_id');
+        $teamproject->save();
+        // return $teamproject;
+        return $teamproject;
+       
     }
 
     /**
@@ -44,10 +46,24 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function show(TeamProject $teamProject)
+    public function show($id)
     {
         //
+        $teamProject = TeamProject::find($id)::with('project','team')->get();
+        if($teamProject)
+        {
+            return response()->json([
+                'Team Project'=> $teamProject
+            ],200);
+        }
+        else{
+            return response()->json([
+                'Team Project'=>'Team Project could not be found' 
+            ],500);
+
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,7 +71,7 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function edit(TeamProject $teamProject)
+    public function edit( $teamProject)
     {
         //
     }
@@ -67,10 +83,29 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TeamProject $teamProject)
+    public function update( Request $request, $id)
     {
-        //
+        $teamProject = TeamProject::find($id);
+        if($teamProject){
+            $teamProject->Team_id = $request->Team_id;
+            $teamProject->Project_id = $request->Project_id;
+            if($teamProject->update()){
+                return response()->json([
+                    'data'=> $teamProject
+                ],200);
+            }
+            else
+            {
+                return response()->json([
+                    'Team Project'=>'team project could not be updated' 
+                ],500);
+            }
+        }
+        return response()->json([
+            'Team Project'=>'team project could not be found' 
+        ],500);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +113,23 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TeamProject $teamProject)
+    public function destroy($id)
     {
-        //
+        
+            
+            $teamProject = TeamProject::find($id);
+            if($teamProject->delete()){
+                return response()->json([
+                    'Team project'=> "has been deleted"
+                ],200);
+            }
+            else
+            {
+                return response()->json([
+                    'Team project'=>'could not be deleted' 
+                ],500);
+            }
+        
+    
     }
 }
