@@ -25,9 +25,4 @@ class employee extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
-
-    public function kpi()
-    {
-        return $this->belongsToMany(KPI::class, 'kpi_id');
-    }
 }

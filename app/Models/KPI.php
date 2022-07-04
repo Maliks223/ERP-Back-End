@@ -13,9 +13,4 @@ class KPI extends Model
     protected $fillable = [
         'name'
     ];
-
-    public function employeeee()
-    {
-        return $this->belongsToMany(employee::class, 'employee_id');
-    }
 }
