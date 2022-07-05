@@ -44,4 +44,31 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
  }
+
+ //EMPLOYEE_KPI
+ //   Schema::create('employee_kpi', function (Blueprint $table) {
+  
+// });
+
+
+// KPI
+// Schema::create('kpis', function (Blueprint $table) {
+  
+// });
+
+//MODELS\EMPLOYEEKPI
+
+
+
+//MODELS/KPI
+
+
+
+//CONTRROLLERS EMPLOYEEKPI
+ 
+
+    //CONTROLLERS/KPI
+
+
+    
  

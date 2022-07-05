@@ -5,15 +5,17 @@ use test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
-use App\Models\KPI;
-
-
+use App\Models\kpi;
+use App\Models\Project;
 use App\Models\Role;
+
+
+
 
 class employee extends Model
 {
     use HasFactory;
-
+protected $hidden=['pivot'];
     protected $fillable = [
         'firstname',
         'lastname',
@@ -28,14 +30,17 @@ class employee extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
-    // public function Roles()
-    // {
-    //      return $this->belongsToMany(Role::class,'employee_roles','employee_id','role_id');
-    //  }
-    // public function projects()
-    // {
-    //     return $this->belongsTo(employeeRole::class,'project_id');
-    // }
+    public function kpis(){
+        return $this->belongsToMany(Kpi::class,'employee_kpis','employee_id','kpi_id','id','id');
+    }
+    public function roles()
+    {
+         return $this->belongsToMany(Role::class,'employee_roles','employee_id','role_id');
+     }
+     public function projects(){
+        return $this->belongsToMany(Project::class,'employee_roles','project_id','role_id');
+    }
+ 
 
 }
 

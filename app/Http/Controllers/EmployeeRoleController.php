@@ -15,8 +15,8 @@ class EmployeeRoleController extends Controller
      */
     public function index()
     {
-       $emplo= employeeRole::with('Roles','employeess','projectss')->get();
-       return $emplo;
+      return employeeRole::all();
+    
     // $roles =employeeRole::find(1)->Roles()->orderBy('id')->get();
     // return $roles;
 

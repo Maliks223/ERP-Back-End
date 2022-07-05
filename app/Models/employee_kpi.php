@@ -4,16 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class TeamProject extends Model
+use App\Models\kpi;
+class employee_kpi extends Model
 {
-    protected $fillable = [
-        'Team_id',
-        'Project_id',    
-    ];
     use HasFactory;
+    protected $fillable = [
+        'employee_id',
+        'kpi_id',
+        'rate',
+        'KPI_date'
+    ];
 
 
-  
-   
+
+
+
 }
