@@ -9,7 +9,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeRoleController;
 use App\Http\Controllers\ProjectController;
-
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,6 +22,7 @@ use App\Http\Controllers\ProjectController;
 */
 
 Route::resource('/project', ProjectController::class);
+Route::resource('/projectreport', ReportController::class);
 Route::resource('teamproject', TeamProjectController::class);
 
 

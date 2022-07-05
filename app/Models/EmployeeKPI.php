@@ -25,4 +25,9 @@ class EmployeeKPI extends Model
     public function kpis(){
         return $this->belongsToMany(KPI::class,'employee_k_p_i_s', 'employee_id', 'kpi_id');
     }
+
+    public function reportKpi()
+    {
+        return $this->hasMany(Report::class);
+    }
 }
