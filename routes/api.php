@@ -29,7 +29,7 @@ Route::resource('/teamproject', TeamProjectController::class);
 
 
 
-Route::get('/get', [AuthController::class, 'get']);
+// Route::get('/get', [AuthController::class, 'index']);
 // Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
 // });
 Route::post('/register', [AuthController::class, 'register']);
@@ -65,3 +65,7 @@ Route::resource('employeekpi', EmployeeKpiController::class);
 
 
 Route::resource('/kpi', KpiController::class);
+
+Route::group(['middleware'=>['auth.jwt','SuperAdmin']], function(){
+    Route::get('get' , [AuthController::class, 'index']);
+});

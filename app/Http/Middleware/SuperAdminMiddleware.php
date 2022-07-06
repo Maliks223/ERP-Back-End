@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\Http\Middleware\Auth;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdminMiddleware
 {
@@ -16,25 +18,15 @@ class SuperAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-
         if(Auth::check()){
-            if(Auth::user()->role == "1"){
-            
-            return $next($request);
-            
-            }else{
-               return "kusa blaban";
-            
-                }
-            
-            }else{
-                return "lllll";
-            
-            
-            
+            if(Auth::user()->role==1){
+                return $next($request);
             }
-        return $next($request);
-    
+            else{
+                return response()->json(['mank super'],500);
+            }
+
+        }
     }
 
 }
