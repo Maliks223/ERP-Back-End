@@ -22,7 +22,7 @@ class CreateEmployeesTable extends Migration
                 $table->string('image')->nullable(); 
                 // $table->integ('team_id');
             $table->timestamps();
-            $table->foreignId('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreignId('team_id')->references('id')->on('teams')->onDelete('cascade')->nullable(0);
         });
     }
 

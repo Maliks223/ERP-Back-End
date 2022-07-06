@@ -14,7 +14,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return Role::with('employeess')->get();
+        return Role::with('project')->get();
     }
 
     /**

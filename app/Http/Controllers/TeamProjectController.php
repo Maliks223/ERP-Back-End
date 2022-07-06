@@ -31,6 +31,11 @@ class TeamProjectController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
+        $this->validate($request,[
+       'Team_id'=>'required',
+       'Project_id'=>'required'
+        ]);
         $teamproject = new TeamProject();
         $teamproject->Team_id = $request->input('Team_id');
         $teamproject->Project_id = $request->input('Project_id');
@@ -49,6 +54,7 @@ class TeamProjectController extends Controller
     public function show($id)
     {
         //
+       
         $teamProject = TeamProject::find($id)::all();
         if($teamProject)
         {
@@ -85,6 +91,12 @@ class TeamProjectController extends Controller
      */
     public function update( Request $request, $id)
     {
+        //validation
+        $this->validate($request,[
+            'Team_id'=>'required',
+            'Project_id'=>'required'
+             ]);
+
         $teamProject = TeamProject::find($id);
         if($teamProject){
             $teamProject->Team_id = $request->Team_id;

@@ -17,6 +17,19 @@ class employeeRole extends Model
         'role_id',
         'project_id',
     ];
+
+    public function Rolesi()
+    {
+      $this->belongsTo(employee::class,'role_id');
+    }
+
+
+    public function projectm()
+    {
+      $this->belongsTo(Project::class,'project_id');
+    }
+
+
     
 }
 

@@ -13,8 +13,14 @@ class Role extends Model
     protected $fillable=['role'];
 
 
-    public function employeess(){
-        return $this->belongsToMany(Employee::class,'employee_roles','role_id','employee_id');
+    public function pivotproject(){
+        return $this->hasMany(employeeRole::class,'role_id');
     }
+    public function projectop(){
+        return $this->hasMany(Project::class)->with('projrectito');
+    }
+
+
+
   
 }
