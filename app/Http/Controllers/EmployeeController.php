@@ -15,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $emplo = Employee::with('teams', 'kpis', 'projects', 'roles')->get();;
+        $emplo = Employee::with('teams', 'kpis', 'roles')->get();;
         return $emplo;
     }
     // 
@@ -28,8 +28,12 @@ class EmployeeController extends Controller
     public function store(Request $request)
 
     {
+        //validation
         $this->validate($request, [
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'email'        =>  'required|email|required',
+            'phonenumber'        =>  'numeric|min:8'
+
         ]);
 
         $employee = new Employee();
@@ -73,7 +77,10 @@ class EmployeeController extends Controller
 
     {
         $this->validate($request, [
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'email'        =>  'required|email|required',
+            'phonenumber'        =>  'numeric|min:8'
+
         ]);
         //updating stuff with fucking image
         $post = Employee::find($id);

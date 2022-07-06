@@ -37,6 +37,8 @@ class KpiController extends Controller
          */
         public function store(Request $request)
         {
+
+          
             $kpi = new kpi();
             $kpi->fill($request->all());
             if ($kpi->save()) {

@@ -14,16 +14,29 @@ use App\Http\Middleware\JWTMiddleware;
 class AuthController extends Controller
 {
     public $loginAfterSignUp = true;
-
-
     public function index(Request $request)
     {
         return User::all();
     }
 
 
+
     public function login(Request $request)
     {
+        $this->validate($request, [
+            'email'        =>  'required|email|required|unique',
+            'password' => 'required|
+                    min:6|
+                    regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|'
+
+            // English uppercase characters (A – Z)
+            // English lowercase characters (a – z)
+            // Base 10 digits (0 – 9)
+            // Non-alphanumeric (For example: !, $, #, or %)
+            // Unicode characters
+
+
+        ]);
         $input = $request->only('email', 'password');
         $token = null;
 
@@ -40,6 +53,7 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
+        dd($request);
         $this->validate($request, [
             'token' => 'required'
         ]);
@@ -60,6 +74,16 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+
+        //validation
+        $this->validate($request, [
+            'email'        =>  'required|email|required|unique',
+            'password' => 'required|min:6|
+                    regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|',
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+
+
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -83,6 +107,15 @@ class AuthController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validation
+        $this->validate($request, [
+            'email'        =>  'required|email|required|unique',
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            // 'password' => ['required', 
+            // 'min:6', 
+            // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/']
+        ]);
+
         $user = User::find($id);
         $user->update([
             'name' => $request->input('name'),
