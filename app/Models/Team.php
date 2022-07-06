@@ -10,7 +10,7 @@ class Team extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 
+        'name',
     ];
 
     public function employees()
@@ -18,7 +18,8 @@ class Team extends Model
         return $this->hasMany(Employee::class);
     }
 
-    public function project(){
-        return $this->belongsToMany(Project::class,'team_projects','Team_id','Project_id');
+    public function project()
+    {
+        return $this->belongsToMany(Project::class, 'team_projects', 'Team_id', 'Project_id');
     }
 }

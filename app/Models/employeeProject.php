@@ -14,7 +14,6 @@ class employeeProject extends Model
         'employee_id',
         'project_id',
         'role_id'
-       
     ];
     
 }

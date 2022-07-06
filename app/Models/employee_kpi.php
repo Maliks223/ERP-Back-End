@@ -15,8 +15,4 @@ class employee_kpi extends Model
         'KPI_date'
     ];
 
-
-
-
-
 }

@@ -25,8 +25,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role=new Role();
-        $role->role=$request->input('role');
+        $role = new Role();
+        $role->role = $request->input('role');
         $role->save();
         return $role;
     }
@@ -40,7 +40,6 @@ class RoleController extends Controller
     public function show(Request $request, $id)
     {
         return Role::find($id);
-       
     }
 
     /**
@@ -52,9 +51,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $roleid=Role::find($id);
-$roleid->update(['role'=>$request->input('role')]);
-return $roleid;
+        $roleid = Role::find($id);
+        $roleid->update(['role' => $request->input('role')]);
+        return $roleid;
     }
 
     /**

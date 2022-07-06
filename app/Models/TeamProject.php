@@ -9,11 +9,7 @@ class TeamProject extends Model
 {
     protected $fillable = [
         'Team_id',
-        'Project_id',    
+        'Project_id',
     ];
     use HasFactory;
-
-
-  
-   
 }
