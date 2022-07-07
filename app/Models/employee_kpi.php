@@ -12,7 +12,8 @@ class employee_kpi extends Model
         'employee_id',
         'kpi_id',
         'rate',
-        'KPI_date'
     ];
+
+    protected $dates = ['KPI_date'];
 
 }
