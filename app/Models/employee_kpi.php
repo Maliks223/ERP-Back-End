@@ -15,6 +15,11 @@ class employee_kpi extends Model
         'KPI_date'
     ];
 
+    protected $dates =['KPI_date'];
+   
+    public function sikolombus(){
+        return $this->belongsTo(kpi::class);
+    }
 
 
 

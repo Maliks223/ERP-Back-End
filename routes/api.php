@@ -9,6 +9,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeRoleController;
 use App\Http\Controllers\EmployeeKpiController;
+use App\Http\Controllers\EvalutionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamProjectController;
 
@@ -36,6 +37,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::resource('/project', ProjectController::class);
 Route::resource('/roles', RoleController::class);
 Route::resource('/employeerole', EmployeeRoleController::class);
+// Route::resource('/evalution',EvalutionController::class);
+Route::get('/evalution/{id}',[EvalutionController::class,'index']);
+
+Route::post('/evalution',[EvalutionController::class,'store']);
 
 
 

@@ -15,6 +15,7 @@ use App\Models\Role;
 class employee extends Model
 {
     use HasFactory;
+   
 protected $hidden=['pivot'];
     protected $fillable = [
         'firstname',
@@ -31,7 +32,7 @@ protected $hidden=['pivot'];
         return $this->belongsTo(Team::class, 'team_id');
     }
     public function kpis(){
-        return $this->belongsToMany(Kpi::class,'employee_kpis','employee_id','kpi_id','id','id');
+        return $this->belongsToMany(Kpi::class,'employee_kpis','employee_id','kpi_id','id','id')->with('pivotkpi');
     }
     // public function roles()
     // {
@@ -40,6 +41,9 @@ protected $hidden=['pivot'];
      public function roles(){
         return $this->belongsToMany(Role::class,'employee_roles','project_id','role_id')->with('pivotproject');
     }
+    public function employeekpi(){
+        return  $this->belongsTo(employee_kpi::class,'employee_kpis');
+      }
     
  
 
