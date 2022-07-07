@@ -25,8 +25,8 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        $team=new Team();
-        $team->name=$request->input('name');
+        $team = new Team();
+        $team->name = $request->input('name');
         $team->save();
         return $team;
     }
@@ -51,9 +51,9 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $teamid=Team::find($id);
-$teamid->update(['name'=>$request->input('name')]);
-return $teamid;
+        $teamid = Team::find($id);
+        $teamid->update(['name' => $request->input('name')]);
+        return $teamid;
     }
 
     /**

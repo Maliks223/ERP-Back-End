@@ -14,8 +14,8 @@ class TeamProjectController extends Controller
      */
     public function index()
     {
-      $emplo=TeamProject::all();
-      return $emplo;
+        $emplo = TeamProject::all();
+        return $emplo;
     }
 
     /**
@@ -32,9 +32,9 @@ class TeamProjectController extends Controller
     public function store(Request $request)
     {
         //validation
-        $this->validate($request,[
-       'Team_id'=>'required',
-       'Project_id'=>'required'
+        $this->validate($request, [
+            'Team_id' => 'required',
+            'Project_id' => 'required'
         ]);
         $teamproject = new TeamProject();
         $teamproject->Team_id = $request->input('Team_id');
@@ -42,7 +42,6 @@ class TeamProjectController extends Controller
         $teamproject->save();
         // return $teamproject;
         return $teamproject;
-       
     }
 
     /**
@@ -54,19 +53,16 @@ class TeamProjectController extends Controller
     public function show($id)
     {
         //
-       
-        $teamProject = TeamProject::find($id)::all();
-        if($teamProject)
-        {
-            return response()->json([
-                'Team Project'=> $teamProject
-            ],200);
-        }
-        else{
-            return response()->json([
-                'Team Project'=>'Team Project could not be found' 
-            ],500);
 
+        $teamProject = TeamProject::find($id)::all();
+        if ($teamProject) {
+            return response()->json([
+                'Team Project' => $teamProject
+            ], 200);
+        } else {
+            return response()->json([
+                'Team Project' => 'Team Project could not be found'
+            ], 500);
         }
     }
 
@@ -77,7 +73,7 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function edit( $teamProject)
+    public function edit($teamProject)
     {
         //
     }
@@ -89,33 +85,31 @@ class TeamProjectController extends Controller
      * @param  \App\Models\TeamProject  $teamProject
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id)
+    public function update(Request $request, $id)
     {
         //validation
-        $this->validate($request,[
-            'Team_id'=>'required',
-            'Project_id'=>'required'
-             ]);
+        $this->validate($request, [
+            'Team_id' => 'required',
+            'Project_id' => 'required'
+        ]);
 
         $teamProject = TeamProject::find($id);
-        if($teamProject){
+        if ($teamProject) {
             $teamProject->Team_id = $request->Team_id;
             $teamProject->Project_id = $request->Project_id;
-            if($teamProject->update()){
+            if ($teamProject->update()) {
                 return response()->json([
-                    'data'=> $teamProject
-                ],200);
-            }
-            else
-            {
+                    'data' => $teamProject
+                ], 200);
+            } else {
                 return response()->json([
-                    'Team Project'=>'team project could not be updated' 
-                ],500);
+                    'Team Project' => 'team project could not be updated'
+                ], 500);
             }
         }
         return response()->json([
-            'Team Project'=>'team project could not be found' 
-        ],500);
+            'Team Project' => 'team project could not be found'
+        ], 500);
     }
 
 
@@ -127,21 +121,17 @@ class TeamProjectController extends Controller
      */
     public function destroy($id)
     {
-        
-            
-            $teamProject = TeamProject::find($id);
-            if($teamProject->delete()){
-                return response()->json([
-                    'Team project'=> "has been deleted"
-                ],200);
-            }
-            else
-            {
-                return response()->json([
-                    'Team project'=>'could not be deleted' 
-                ],500);
-            }
-        
-    
+
+
+        $teamProject = TeamProject::find($id);
+        if ($teamProject->delete()) {
+            return response()->json([
+                'Team project' => "has been deleted"
+            ], 200);
+        } else {
+            return response()->json([
+                'Team project' => 'could not be deleted'
+            ], 500);
+        }
     }
 }

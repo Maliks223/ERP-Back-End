@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-    protected $hidden=['pivot'];
+    protected $hidden = ['pivot'];
 
-    protected $fillable=['role'];
+    protected $fillable = ['role'];
 
 
-    public function pivotproject(){
-        return $this->hasMany(employeeRole::class,'role_id');
+    public function pivotproject()
+    {
+        return $this->hasMany(employeeRole::class, 'role_id');
     }
-    public function projectop(){
+    public function projectop()
+    {
         return $this->hasMany(Project::class)->with('projrectito');
     }
-
-
-
-  
 }

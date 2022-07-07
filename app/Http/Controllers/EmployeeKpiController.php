@@ -29,25 +29,21 @@ class EmployeeKpiController extends Controller
      */
     public function store(Request $request)
     {
-
-
         //validation
         $this->validate($request, [
             'rate' => 'required',
             'employee_id' => 'required',
-            'kpi_id' => 'required'
+            'kpi_id' => 'required',
+            'KPI_date' => 'required|date'
         ]);
-
 
         $empKpi = new employee_kpi();
         $empKpi->employee_id = $request->input('employee_id');
         $empKpi->kpi_id = $request->input('kpi_id');
         $empKpi->rate = $request->input('rate');
-
-
         $mydate = $request->input('KPI_date');
-        $empKpi->KPI_date = Carbon::parse($mydate)->format('Y-m-d');
-                $empKpi->save();
+        $empKpi->KPI_date = Carbon::parse($mydate);
+        $empKpi->save();
         return $empKpi;
     }
     /**

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\employee;
 use App\Models\Team;
+
 class Project extends Model
 {
 
@@ -28,5 +29,4 @@ class Project extends Model
     {
         return $this->belongsTo(Role::class)->with('projectm');
     }
-
 }
