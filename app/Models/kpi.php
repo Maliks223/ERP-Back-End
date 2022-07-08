@@ -14,11 +14,11 @@ class kpi extends Model
 
     public function employees()
     {
-        return $this->belongsToMany(Employee::class, 'employee_kpis', 'kpi_id', 'employee_id', 'id', 'id');
+        return $this->belongsToMany(Employee::class, 'employee_kpis', 'kpi_id', 'employee_id', 'id', 'id')->withPivot('rate');
     }
-    public function pivotkpi(){
-        return $this->hasMany(employee_kpi::class,'kpi_id');
-    }
+    // public function pivotkpi(){
+    //     return $this->hasMany(employee_kpi::class,'kpi_id');
+    // }
  
 
 }
