@@ -32,7 +32,7 @@ class employee extends Model
         return $this->belongsTo(Team::class, 'team_id');
     }
     public function kpis(){
-        return $this->belongsToMany(Kpi::class,'employee_kpis','employee_id','kpi_id','id','id')->withPivot('rate');//->with('pivotkpi');
+        return $this->belongsToMany(Kpi::class,'employee_kpis','employee_id','kpi_id','id','id')->withPivot('rate')->with('pivotkpi');
     }
     // public function kpis()
     // {
