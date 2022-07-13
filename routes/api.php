@@ -4,12 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KPIController;
+use App\Http\Controllers\KpiController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeRoleController;
+use App\Http\Controllers\EmployeeKpiController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TeamProjectController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,8 +25,8 @@ use App\Http\Controllers\ReportController;
 */
 
 Route::resource('/project', ProjectController::class);
-Route::resource('/projectreport', ReportController::class);
-Route::resource('teamproject', TeamProjectController::class);
+// Route::resource('/projectreport', ReportController::class);
+Route::resource('/teamproject', TeamProjectController::class);
 
 
 
@@ -60,7 +63,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 // });
 
 
-Route::resource('employeekpi', EmployeeKPIController::class);
+Route::resource('employeekpi', EmployeeKpiController::class);
 
 
-Route::resource('/kpi', KPIController::class);
+Route::resource('/kpi', KpiController::class);

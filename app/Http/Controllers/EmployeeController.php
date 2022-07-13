@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
-use App\Models\Team;
 
 class EmployeeController extends Controller
 {
@@ -15,10 +14,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $emplo = Employee::with('teams')->get();;
+        $emplo = Employee::with('teams', 'kpis', 'projects', 'roles')->get();;
         return $emplo;
     }
-
+    // 
     /**
      * Store a newly created resource in storage.
      *
@@ -41,9 +40,10 @@ class EmployeeController extends Controller
         //image upload 
         $getImage = $request->image;
         $image = $request->file('image');
-        $imagePath = $image->store('/images');
+        $imagePath = $image->store('images');
         $employee->image = $image->getClientOriginalName();
         $getImage->move($imagePath);
+       
 
         $employee->save();
         return $employee::with('teams')->get();

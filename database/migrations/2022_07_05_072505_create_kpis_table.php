@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKPISTable extends Migration
+class CreateKpisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateKPISTable extends Migration
      */
     public function up()
     {
-        Schema::create('k_p_i_s', function (Blueprint $table) {
+        Schema::create('kpis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateKPISTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('k_p_i_s');
+        Schema::dropIfExists('kpis');
     }
 }

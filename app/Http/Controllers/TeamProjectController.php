@@ -14,7 +14,7 @@ class TeamProjectController extends Controller
      */
     public function index()
     {
-      $emplo=TeamProject::with('project','team')->get();
+      $emplo=TeamProject::all();
       return $emplo;
     }
 
@@ -23,7 +23,7 @@ class TeamProjectController extends Controller
      *
    
 
-    /**
+ 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,7 +49,7 @@ class TeamProjectController extends Controller
     public function show($id)
     {
         //
-        $teamProject = TeamProject::find($id)::with('project','team')->get();
+        $teamProject = TeamProject::find($id)::all();
         if($teamProject)
         {
             return response()->json([
