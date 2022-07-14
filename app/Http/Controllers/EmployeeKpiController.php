@@ -77,7 +77,7 @@ class EmployeeKpiController extends Controller
         $this->validate($request, [
             'rate' => 'required',
             'employee_id' => 'required',
-            'lpi_id' => 'required'
+            'kpi_id' => 'required'
         ]);
         var_dump($employeeKPI);
         $ekpi = employee_kpi::find($employeeKPI)->first();
