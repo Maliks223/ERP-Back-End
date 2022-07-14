@@ -5,11 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TeamProject extends Model
+
+class employeeProject extends Model
 {
-    protected $fillable = [
-        'Team_id',
-        'Project_id',
-    ];
     use HasFactory;
+  
+    protected $fillable= [
+        'employee_id',
+        'project_id',
+        'role_id'
+    ];
+    
 }
+
+
+
+
+
+

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\employeeRole;
+use App\Models\employeeProject;
 
-class EmployeeRoleController extends Controller
+class EmployeeProjectController extends Controller
 {
 
     /**
@@ -15,7 +15,7 @@ class EmployeeRoleController extends Controller
      */
     public function index()
     {
-        return employeeRole::all();
+        return employeeProject::all();
     }
 
     /**
@@ -26,22 +26,15 @@ class EmployeeRoleController extends Controller
      */
     public function store(Request $request)
     {
-        //validation
-        $this->validate($request, [
-            'project_id' => 'required',
-            'employee_id' => 'required',
-            'role_id' => 'required'
-        ]);
-        $role = new employeeRole();
+        $role = new employeeProject();
         $role->project_id = $request->input('project_id');
         $role->employee_id = $request->input('employee_id');
         $role->role_id = $request->input('role_id');
         $role->save();
         return $role;
     }
-    //; ::with('employees')->where("employee_id","=",$role->id)->get()
-    /**::with('Roles')->where("role_id","=",$role->id)->get();
-     * ::with('projects')->where("project_id","=",$role->id)->get()
+    /**
+     * 
      * Display the specified resource.
      *
      * @param  int  $id
@@ -49,7 +42,7 @@ class EmployeeRoleController extends Controller
      */
     public function show($id)
     {
-        return employeeRole::find($id);
+        return employeeProject::find($id);
     }
 
     /**
@@ -61,14 +54,7 @@ class EmployeeRoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //validation
-        $this->validate($request, [
-            'project_id' => 'required',
-            'employee_id' => 'required',
-            'role_id' => 'required'
-        ]);
-
-        $roleid = employeeRole::find($id);
+        $roleid = employeeProject::find($id);
         $roleid->update([
             'role_id' => $request->input('role_id'),
             'employee_id' => $request->input('employee_id'),
@@ -85,6 +71,6 @@ class EmployeeRoleController extends Controller
      */
     public function destroy($id)
     {
-        return employeeRole::destroy($id);
+        return employeeProject::destroy($id);
     }
 }

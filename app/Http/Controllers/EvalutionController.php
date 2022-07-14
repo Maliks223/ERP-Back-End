@@ -3,20 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Team;
+use App\Models\employee_kpi;
+use Carbon\Carbon;
 
-class TeamController extends Controller
+class EvalutionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id)
     {
-        return Team::with('project')->get();
-    }
+        $startDate = Carbon::createFromFormat('Y-m-d', '2020-10-09');
+        $endDate = Carbon::createFromFormat('Y-m-d', '2022-10-09');
 
+        // $request->$startDate=$request->input('startDate');
+        // $request->$endDate=$request->input('endDate');
+
+        $employee_kpi = employee_kpi::whereBetween('KPI_date', [$startDate, $endDate])->get()->where('kpi_id', $id);
+        return $employee_kpi;
+    }
+    // 
     /**
      * Store a newly created resource in storage.
      *
@@ -24,12 +32,20 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
-        $team = new Team();
-        $team->name = $request->input('name');
-        $team->save();
-        return $team;
+        $s = $request->input('startDate');
+        $e = $request->input('endDate');
+       
+        $startDate = Carbon::createFromFormat('Y-m-d',$s);
+        $endDate = Carbon::createFromFormat('Y-m-d', $e);
+
+
+        $employee_kpi = employee_kpi::whereBetween('KPI_date', [$startDate, $endDate])->get();
+        return $employee_kpi;
     }
+
+
 
     /**
      * Display the specified resource.
@@ -39,7 +55,6 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        return Team::find($id);
     }
 
     /**
@@ -50,11 +65,11 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+
+
     {
-        $teamid = Team::find($id);
-        $teamid->update(['name' => $request->input('name')]);
-        return $teamid;
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -64,6 +79,5 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        return Team::destroy($id);
     }
 }

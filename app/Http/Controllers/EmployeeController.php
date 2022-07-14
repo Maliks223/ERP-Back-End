@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
@@ -14,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $emplo = Employee::with('teams', 'kpis', 'projects', 'roles')->get();;
+        $emplo = Employee::with('teams', 'kpis', 'roles')->get();;
         return $emplo;
     }
     // 
@@ -27,8 +28,12 @@ class EmployeeController extends Controller
     public function store(Request $request)
 
     {
+        //validation
         $this->validate($request, [
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'email'        =>  'required|email|required',
+            'phonenumber'        =>  'numeric|min:8'
+
         ]);
 
         $employee = new Employee();
@@ -37,13 +42,13 @@ class EmployeeController extends Controller
         $employee->email = $request->input('email');
         $employee->phonenumber = $request->input('phonenumber');
         $employee->team_id = $request->input('team_id');
+
         //image upload 
-        $getImage = $request->image;
-        $image = $request->file('image');
-        $imagePath = $image->store('images');
-        $employee->image = $image->getClientOriginalName();
-        $getImage->move($imagePath);
-       
+        $fileName = $request->image->getClientOriginalName();
+        $dateNow = Carbon::now()->toDateTimeString();
+        $uniqueFileName = $dateNow . $fileName;
+        $request->image->storeAs('uploads', $uniqueFileName, 'public');
+        $employee->image = $uniqueFileName;
 
         $employee->save();
         return $employee::with('teams')->get();
@@ -72,7 +77,10 @@ class EmployeeController extends Controller
 
     {
         $this->validate($request, [
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048'
+            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'email'        =>  'required|email|required',
+            'phonenumber'        =>  'numeric|min:8'
+
         ]);
         //updating stuff with fucking image
         $post = Employee::find($id);
@@ -84,9 +92,11 @@ class EmployeeController extends Controller
             "image" => $request->file('image')->move($request->image->store('/images'), $request->image->getclientoriginalname()),
             "team_id" => $request->input('team_id'),
         ]);
-        $image = $request->file('image');
-        $imageName = $image->getClientOriginalName();
-        $post->image = $imageName;
+        $fileName = $request->image->getClientOriginalName();
+        $dateNow = Carbon::now()->toDateTimeString();
+        $uniqueFileName = $dateNow . $fileName;
+        $request->image->storeAs('uploads', $uniqueFileName, 'public');
+        $post->image = $uniqueFileName;
         return $post;
     }
 

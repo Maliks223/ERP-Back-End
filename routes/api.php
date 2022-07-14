@@ -9,6 +9,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeRoleController;
 use App\Http\Controllers\EmployeeKpiController;
+use App\Http\Controllers\EvalutionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TeamProjectController;
@@ -31,13 +32,17 @@ Route::resource('/teamproject', TeamProjectController::class);
 
 
 
-Route::get('/get', [AuthController::class, 'get']);
+// Route::get('/get', [AuthController::class, 'index']);
 // Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
 // });
 Route::post('/register', [AuthController::class, 'register']);
 Route::resource('/project', ProjectController::class);
 Route::resource('/roles', RoleController::class);
 Route::resource('/employeerole', EmployeeRoleController::class);
+// Route::resource('/evalution',EvalutionController::class);
+Route::get('/evalution/{id}',[EvalutionController::class,'index']);
+
+Route::post('/evalution',[EvalutionController::class,'store']);
 
 
 
@@ -67,3 +72,7 @@ Route::resource('employeekpi', EmployeeKpiController::class);
 
 
 Route::resource('/kpi', KpiController::class);
+
+Route::group(['middleware'=>['auth.jwt','SuperAdmin']], function(){
+    Route::get('get' , [AuthController::class, 'index']);
+});

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\employee_kpi;
+use Carbon\Carbon;
+
 class EmployeeKpiController extends Controller
 {
     /**
@@ -14,7 +16,6 @@ class EmployeeKpiController extends Controller
     public function index()
     {
         return employee_kpi::all();
-      
     }
     // $roles =employeeRole::find(1)->Roles()->orderBy('id')->get();
     // return $roles;
@@ -28,34 +29,22 @@ class EmployeeKpiController extends Controller
      */
     public function store(Request $request)
     {
-        // $kpi = new EmployeeKPI();
-        // $kpi->fill($request->all());
-        // if ($kpi->save()) {
-        //     return response()->json([
-        //         'data' => $kpi
-        //     ], 200);
-        // } else {
-        //     return response()->json([
-        //         'EmployeeKPI' => 'EmployeeKPI could not be added'
-        //     ], 500);
-        // }
-
+        //validation
+        $this->validate($request, [
+            'rate' => 'required',
+            'employee_id' => 'required',
+            'kpi_id' => 'required',
+            'KPI_date' => 'required|date'
+        ]);
 
         $empKpi = new employee_kpi();
         $empKpi->employee_id = $request->input('employee_id');
         $empKpi->kpi_id = $request->input('kpi_id');
         $empKpi->rate = $request->input('rate');
-        $empKpi->KPI_date= $request->input('KPI-date');
+        $mydate = $request->input('KPI_date');
+        $empKpi->KPI_date = Carbon::parse($mydate);
         $empKpi->save();
         return $empKpi;
-        // ::with('employeez','kpiz')->get()
-
-        // $kpi = new EmployeeKPI();
-        // $kpi->fill($request->all());
-        // $kpi->save();
-        // $jaafar =  $kpi::with('employees', 'kpis')->get();
-        // return $jaafar;
-
     }
     /**
      * Display the specified resource.
@@ -65,7 +54,7 @@ class EmployeeKpiController extends Controller
      */
     public function show($employeeKPI)
     {
-        return employee_kpi::find($employeeKPI)::with('employees','kpis')->get();
+        return employee_kpi::find($employeeKPI)::with('employees', 'kpis')->get();
     }
 
     /**
@@ -84,6 +73,12 @@ class EmployeeKpiController extends Controller
      */
     public function update(Request $request, $employeeKPI)
     {
+        //validation
+        $this->validate($request, [
+            'rate' => 'required',
+            'employee_id' => 'required',
+            'lpi_id' => 'required'
+        ]);
         var_dump($employeeKPI);
         $ekpi = employee_kpi::find($employeeKPI)->first();
         if ($ekpi) {
@@ -122,5 +117,4 @@ class EmployeeKpiController extends Controller
             ], 500);
         }
     }
-
 }
