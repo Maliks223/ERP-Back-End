@@ -62,7 +62,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        return Employee::find($id);
+        $emp = Employee::with('kpis')->get();
+        return $emp->where('id', $id);
     }
 
     /**
@@ -73,31 +74,43 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-
-
     {
-        $this->validate($request, [
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
-            'email'        =>  'required|email|required',
-            'phonenumber'        =>  'numeric|min:8'
+        // $this->validate($request, [
+        //     'image'        =>  'image|mimes:jpeg,png,jpg,gif|max:3048',
+        //     'email'        =>  'email|required',
+        //     'phonenumber'  =>  'numeric|min:8'
 
-        ]);
-        //updating stuff with fucking image
+        // ]);
         $post = Employee::find($id);
-        $post->update([
-            "firstname" => $request->input('firstname'),
-            "lastname" => $request->input('lastname'),
-            "email" => $request->input('email'),
-            "phonenumber" => $request->input('phonenumber'),
-            "image" => $request->file('image')->move($request->image->store('/images'), $request->image->getclientoriginalname()),
-            "team_id" => $request->input('team_id'),
-        ]);
-        $fileName = $request->image->getClientOriginalName();
-        $dateNow = Carbon::now()->toDateTimeString();
-        $uniqueFileName = $dateNow . $fileName;
-        $request->image->storeAs('uploads', $uniqueFileName, 'public');
-        $post->image = $uniqueFileName;
-        return $post;
+        if ($request->input('firstname')) {
+            $post->firstname = $request->input('firstname');
+            $post->update();
+        }
+        if ($request->input('lastname')) {
+            $post->lastname = $request->input('lastname');
+            $post->update();
+        }
+        if ($request->input('email')) {
+            $post->email = $request->input('email');
+            $post->update();
+        }
+        if ($request->input('phonenumber')) {
+            $post->phonenumber = $request->input('phonenumber');
+            $post->update();
+        }
+        if ($request->hasFile('image')) {
+            $fileName = $request->image->getClientOriginalName();
+            $dateNow = Carbon::now()->toDateTimeString();
+            $uniqueFileName = $dateNow . $fileName;
+            $request->image->storeAs('uploads', $uniqueFileName, 'public');
+            $post->image = $uniqueFileName;
+            $post->update();
+        }
+        if ($request->input('team_id')) {
+            $post->team_id = $request->input('team_id');
+            $post->update();
+        }
+        return response()->json([$post], 200);
     }
 
 
