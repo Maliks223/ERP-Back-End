@@ -42,10 +42,13 @@ class AuthController extends Controller
                 'message' => 'Invalid Email or Password',
             ], 401);
         }
-        return response()->json([
-            'success' => true,
-            'token' => $token,
-        ]);
+        $admin = JWTAuth::user();
+
+        return response()->json(compact('token', 'admin'));
+        // return response()->json([
+        //     'success' => true,
+        //     'token' => $token,
+        // ]);
     }
     public function logout(Request $request)
     {
