@@ -14,10 +14,10 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            // $table->foreignId('employee_id');
-            // $table->foreignId('kpi_id');
-            // $table->id();
-            // $table->timestamps();
+            $table->foreignId('employee_id');
+            $table->foreignId('kpi_id');
+            $table->id();
+            $table->timestamps();
         });
     }
 
