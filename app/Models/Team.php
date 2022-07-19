@@ -20,6 +20,6 @@ class Team extends Model
 
     public function project()
     {
-        return $this->belongsToMany(Project::class, 'team_projects', 'Team_id', 'Project_id');
+        return $this->belongsToMany(Project::class, 'team_projects', 'Team_id', 'Project_id')->withPivot('id');
     }
 }

@@ -44,7 +44,7 @@ Route::get('/evalution/{id}',[EvalutionController::class,'index']);
 
 Route::post('/evalution',[EvalutionController::class,'store']);
 
-
+Route::get('/user',[AuthController::class,'getuser']);
 
 
 //user routes

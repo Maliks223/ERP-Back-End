@@ -20,6 +20,32 @@ class AuthController extends Controller
     }
 
 
+    public function getuser(Request $request)
+     {
+        //  $user=JWTAuth::user();
+
+    //     var_dump($user->id);
+
+  
+
+    //     var_dump($user->name);
+        
+          
+        
+    //     var_dump($user->email);
+       
+    //     return $user;
+   
+
+    $admin = JWTAuth::user();
+
+    return $admin;
+
+  
+       
+    }
+
+
 
     public function login(Request $request)
     {
