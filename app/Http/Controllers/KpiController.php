@@ -109,7 +109,7 @@ class KpiController extends Controller
      */
     public function destroy($kPI)
     {
-        $kpi = kpi::find($kPI)->first();
+        $kpi = kpi::find($kPI);
         if ($kpi->delete()) { //returns a boolean
             return response()->json([
                 'kpi' => "kpi deleted"
