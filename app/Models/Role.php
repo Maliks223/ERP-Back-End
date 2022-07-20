@@ -10,7 +10,7 @@ class Role extends Model
     use HasFactory;
     protected $hidden = ['pivot'];
 
-    protected $fillable = ['role'];
+    protected $fillable = ['role','description'];
 
 
     public function pivotproject()

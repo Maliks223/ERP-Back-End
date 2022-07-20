@@ -26,6 +26,7 @@ class CreateEmployeesTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *
