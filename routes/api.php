@@ -75,5 +75,5 @@ Route::resource('employeekpi', EmployeeKpiController::class);
 Route::resource('/kpi', KpiController::class);
 
 Route::group(['middleware'=>['auth.jwt','SuperAdmin']], function(){
-    Route::get('get' , [AuthController::class, 'index']);
 });
+Route::get('get' , [AuthController::class, 'index']);
