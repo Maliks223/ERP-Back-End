@@ -88,17 +88,6 @@ class EmployeeController extends Controller
                 array_push($filtered, $eachKpi);
             }
         }
-        // return $filtered;
-        // return $latest;
-        // $employeeKpi = json_decode($data[0]->kpis);
-        // $here = $employeeKpi->pivot->orderBy('KPI_date','desc')->get();
-        // return $here;
-        // $res = $here->whereIn('kpi_id', $kpis);
-        // return $res;
-        // foreach ($kpis as $kpid) {
-        //     $res = $here->whereIn('kpi_id', [$kpid]);
-        //     array_push($latest, $res);
-        // return $latest;
         return response()->json([
             'data' => $data,
             'latest_Kpi' => $latest,
