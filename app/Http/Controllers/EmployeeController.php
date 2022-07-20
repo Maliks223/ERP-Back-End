@@ -89,7 +89,7 @@ class EmployeeController extends Controller
             }
         }
         return response()->json([
-            'data' => $data,
+            'data' => array_values($data->toArray()),
             'latest_Kpi' => $latest,
             'filtered' => $filtered
         ], 200);
