@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\employee_kpi;
+use App\Models\kpi;
 
 class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respemployees/id=1onse
      */
     public function index()
     {
-        $emplo = Employee::with('teams', 'kpis', 'roles')->get();;
+        $emplo = Employee::with('teams', 'kpis', 'roles')->get();
         return $emplo;
     }
     // 
@@ -62,8 +64,46 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $emp = Employee::with('kpis')->get();
-        return $emp->where('id', $id);
+
+        $emp = Employee::with('teams', 'kpis', 'roles')->get();
+        $data = $emp->where('id', $id);
+        $kpis = kpi::get('id')->pluck('id')->toArray();
+        $latest = [];
+        foreach ($kpis as $kpid) {
+            $employeeKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('created_at', 'desc')->get()->first();
+            $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
+            $employeeKpi->kpi_name = $kpiDescription[0];
+            if ($employeeKpi) {
+                array_push($latest, $employeeKpi);
+            }
+        }
+        $filtered = [];
+        foreach ($kpis as $kpid) {
+            $eachKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('KPI_date', 'asc')->get();
+            $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
+            foreach ($eachKpi as $each) {
+                $each->kpi_name = $kpiDescription[0];
+            }
+            if ($employeeKpi) {
+                array_push($filtered, $eachKpi);
+            }
+        }
+        // return $filtered;
+        // return $latest;
+        // $employeeKpi = json_decode($data[0]->kpis);
+        // $here = $employeeKpi->pivot->orderBy('KPI_date','desc')->get();
+        // return $here;
+        // $res = $here->whereIn('kpi_id', $kpis);
+        // return $res;
+        // foreach ($kpis as $kpid) {
+        //     $res = $here->whereIn('kpi_id', [$kpid]);
+        //     array_push($latest, $res);
+        // return $latest;
+        return response()->json([
+            'data' => $data,
+            'latest_Kpi' => $latest,
+            'filtered' => $filtered
+        ], 200);
     }
 
     /**
