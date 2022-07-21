@@ -14,7 +14,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Team::with('project')->get();
+        return Team::with('employees','project')->get();
     }
 
     /**
