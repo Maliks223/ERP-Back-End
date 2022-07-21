@@ -20,6 +20,9 @@ class employee_kpi extends Model
         return $this->belongsTo(kpi::class);
     }
 
+    // public function kpis(){
+    //     return $this->belongsTo(kpi::class);
+    // }
 
 
 
