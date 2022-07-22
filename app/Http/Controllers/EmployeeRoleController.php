@@ -50,6 +50,7 @@ class EmployeeRoleController extends Controller
         $record = employeeRole::all();
         $record= $record->where('employee_id', $id);
         return array_values($record->toArray());
+        
     }
 
     /**
