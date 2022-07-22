@@ -49,6 +49,7 @@ Route::get('/user',[AuthController::class,'getuser']);
 
 //user routes
 Route::get('/users', [AuthController::class, 'get']);
+Route::get('/getAdmin/{id}', [AuthController::class, 'getAdmin']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::resource('/users', AuthController::class);
