@@ -110,23 +110,22 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        // if($validator->fails()) {
-        //     return Redirect::back()->withErrors($validator);
-        // }
-        $project = Project::find($id)->first();
-        if ($project->delete()) { //returns a boolean
+
+        $project = Project::with('team')->get()->find($id);
+        if (count($project->team) > 0) {
             return response()->json([
-                'project' => "has been deleted"
-            ], 200);
-        } else {
-            return response()->json([
-                'project' => 'operation failed'
+                'error' => "can't be deleted while a Team is assigned"
             ], 500);
+        } else {
+            if ($project->delete()) { //returns a boolean
+                return response()->json([
+                    'response' => "has been deleted"
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => 'operation failed'
+                ], 500);
+            }
         }
-        // / $projectDelete = Project::find($project)->first();
-        // $projectDelete -> delete();
-        // return $projectDelete;
-
-
     }
 }

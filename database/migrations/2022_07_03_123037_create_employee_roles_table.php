@@ -14,7 +14,7 @@ class CreateEmployeeRolesTable extends Migration
     public function up()
     {
         Schema::create('employee_roles', function (Blueprint $table) {
-            $table->id();
+            $table->primary(['employee_id', 'role_id', 'project_id']);
             $table->foreignId('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');
