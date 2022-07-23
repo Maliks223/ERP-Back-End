@@ -133,21 +133,42 @@ class AuthController extends Controller
     public function update(Request $request, $id)
     {
         //validation
-        $this->validate($request, [
-            'email'        =>  'required|email|required|unique',
-            'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+        // $this->validate($request, [
+        //     'email'        =>  'required|email|required|unique',
+        //     'image'        =>  'required|image|mimes:jpeg,png,jpg,gif|max:3048',
             // 'password' => ['required', 
             // 'min:6', 
             // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/']
-        ]);
+        // ]);
 
-        $user = User::find($id);
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-        ]);
-        $user->save();
-        return $user;
+        $post = User::find($id);
+        if ($request->input('name')) {
+            $post->name = $request->input('name');
+            $post->update();
+        }
+        if ($request->input('email')) {
+            $post->email = $request->input('email');
+            $post->update();
+        }
+        if ($request->hasFile('profile_image')) {
+            $fileName = $request->profile_image->getClientOriginalName();
+            $dateNow = Carbon::now()->toDateTimeString();
+            $uniqueFileName = $dateNow . $fileName;
+            $request->profile_image->storeAs('uploads', $uniqueFileName, 'public');
+            $post->profile_image = $uniqueFileName;
+            $post->update();
+        }
+        return response()->json([$post], 200);
+
+
+
+        // $user->update([
+        //     'name' => $request->input('name'),
+        //     'email' => $request->input('email'),
+        
+        // ]);
+        // $user->save();
+        // return $user;
     }
 
     public function destroy($id)
