@@ -46,7 +46,7 @@ class employee extends Model
     //  }
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'employee_roles', 'project_id', 'role_id')->with('pivotproject');
+        return $this->belongsToMany(Role::class, 'employee_roles', 'employee_id', 'role_id');
     }
     // public function employeekpi()
     // {

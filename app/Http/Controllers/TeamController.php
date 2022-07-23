@@ -14,7 +14,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Team::with('employees','project')->get();
+        return Team::with('employees','projects')->get();
     }
 
     /**
@@ -39,7 +39,9 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        return Team::find($id);
+        $team = Team::with('employees', 'projects')->get();
+        $data = $team->where('id', $id);
+        return $data;
     }
 
     /**
