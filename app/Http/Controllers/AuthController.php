@@ -38,16 +38,16 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // $this->validate($request, [
-        //     'email' => 'required|email|required|unique:users',
-        //     'password' => 'required|min:6'
-        //     // regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|
-        //     // English uppercase characters (A – Z)
-        //     // English lowercase characters (a – z)
-        //     // Base 10 digits (0 – 9)
-        //     // Non-alphanumeric (For example: !, $, #, or %)
-        //     // Unicode characters
-        // ]);
+        $this->validate($request, [
+            'email' => 'required|email|required',
+            'password' => 'required|min:6'
+            // regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|
+            // English uppercase characters (A – Z)
+            // English lowercase characters (a – z)
+            // Base 10 digits (0 – 9)
+            // Non-alphanumeric (For example: !, $, #, or %)
+            // Unicode characters
+        ]);
         $input = $request->only('email', 'password');
         $token = null;
 
