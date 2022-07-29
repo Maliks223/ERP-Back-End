@@ -75,7 +75,9 @@ class EmployeeController extends Controller
         if (count($dataObj->kpis) > 0) {
             $kpis = $dataObj->kpis;
             $kpis = array_column($kpis, 'id');
+            $kpis= array_unique($kpis);
         }
+        // return $kpis;
         $latest = [];
         $filtered = [];
         if ($kpis) {
