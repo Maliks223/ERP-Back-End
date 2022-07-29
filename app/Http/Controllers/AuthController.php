@@ -21,28 +21,17 @@ class AuthController extends Controller
 
 
     public function getuser(Request $request)
-     {
-        //  $user=JWTAuth::user();
+    {
 
-    //     var_dump($user->id);
+        $admin = JWTAuth::user();
 
-  
+        return $admin;
+    }
 
-    //     var_dump($user->name);
-        
-          
-        
-    //     var_dump($user->email);
-       
-    //     return $user;
-   
+    public function getAdmin($id)
+    {
 
-    $admin = JWTAuth::user();
-
-    return $admin;
-
-  
-       
+        return  User::find($id);
     }
 
 
@@ -78,10 +67,6 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        dd($request);
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
         try {
             // JwtAuth::invalidate($request->token);
             auth()->logout();
@@ -175,8 +160,4 @@ class AuthController extends Controller
     {
         return User::destroy($id);
     }
-
-    // public function super($id){
-    //     return 
-    // }
 }

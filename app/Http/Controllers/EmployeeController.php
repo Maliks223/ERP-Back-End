@@ -8,6 +8,8 @@ use App\Models\Employee;
 use App\Models\employee_kpi;
 use App\Models\kpi;
 
+use function PHPUnit\Framework\returnSelf;
+
 class EmployeeController extends Controller
 {
     /**
@@ -67,29 +69,38 @@ class EmployeeController extends Controller
 
         $emp = Employee::with('teams', 'kpis', 'roles')->get();
         $data = $emp->where('id', $id);
-        $kpis = kpi::get('id')->pluck('id')->toArray();
-        $latest = [];
-        foreach ($kpis as $kpid) {
-            $employeeKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('created_at', 'desc')->get()->first();
-            $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
-            $employeeKpi->kpi_name = $kpiDescription[0];
-            if ($employeeKpi) {
-                array_push($latest, $employeeKpi);
-            }
+        $data =  array_values($data->toArray());
+        $dataObj = (object) $data[0];
+        $kpis = [];
+        if (count($dataObj->kpis) > 0) {
+            $kpis = $dataObj->kpis;
+            $kpis = array_column($kpis, 'id');
+            $kpis=array_unique($kpis);
         }
+        $latest = [];
         $filtered = [];
-        foreach ($kpis as $kpid) {
-            $eachKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('KPI_date', 'asc')->get();
-            $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
-            foreach ($eachKpi as $each) {
-                $each->kpi_name = $kpiDescription[0];
+        if ($kpis) {
+            foreach ($kpis as $kpid) {
+                $employeeKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('created_at', 'desc')->get()->first();
+                $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
+                $employeeKpi->kpi_name = $kpiDescription[0];
+                if ($employeeKpi) {
+                    array_push($latest, $employeeKpi);
+                }
             }
-            if ($employeeKpi) {
-                array_push($filtered, $eachKpi);
+            foreach ($kpis as $kpid) {
+                $eachKpi = employee_kpi::where(['employee_id' => $id, 'kpi_id' => $kpid])->orderBy('KPI_date', 'asc')->get();
+                $kpiDescription = kpi::where(["id" => $kpid])->get()->pluck("name");
+                foreach ($eachKpi as $each) {
+                    $each->kpi_name = $kpiDescription[0];
+                }
+                if ($employeeKpi) {
+                    array_push($filtered, $eachKpi);
+                }
             }
         }
         return response()->json([
-            'data' => array_values($data->toArray()),
+            'data' => $data,
             'latest_Kpi' => $latest,
             'filtered' => $filtered
         ], 200);

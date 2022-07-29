@@ -39,9 +39,7 @@ class EmployeeRoleController extends Controller
         $role->save();
         return $role;
     }
-    //; ::with('employees')->where("employee_id","=",$role->id)->get()
-    /**::with('Roles')->where("role_id","=",$role->id)->get();
-     * ::with('projects')->where("project_id","=",$role->id)->get()
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -49,7 +47,10 @@ class EmployeeRoleController extends Controller
      */
     public function show($id)
     {
-        return employeeRole::find($id);
+        $record = employeeRole::all();
+        $record= $record->where('employee_id', $id);
+        return array_values($record->toArray());
+        
     }
 
     /**
