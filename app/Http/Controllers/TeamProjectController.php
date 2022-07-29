@@ -46,6 +46,7 @@ class TeamProjectController extends Controller
             return response()->json([$teamproject], 200);
         }
         return response()->json(["error" => "can't bde added"], 500);
+        
     }
 
     /**
