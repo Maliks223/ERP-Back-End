@@ -93,7 +93,7 @@ class ProjectController extends Controller
 
         if ($project->update()) { //returns a boolean
             return response()->json([
-                'project' => "has been updated"
+                'project' => "project has been updated"
             ], 200);
         } else {
             return response()->json([

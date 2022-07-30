@@ -36,12 +36,17 @@ class TeamProjectController extends Controller
             'Team_id' => 'required',
             'Project_id' => 'required'
         ]);
-        $teamproject = new TeamProject();
-        $teamproject->Team_id = $request->input('Team_id');
-        $teamproject->Project_id = $request->input('Project_id');
-        $teamproject->save();
-        // return $teamproject;
-        return $teamproject;
+        $exists = TeamProject::where(['Team_id' => $request->input('Team_id'), 'Project_id' => $request->input('Project_id')])->get();
+        if (count($exists) == 0) {
+            $teamproject = new TeamProject();
+            $teamproject->Team_id = $request->input('Team_id');
+            $teamproject->Project_id = $request->input('Project_id');
+            $teamproject->save();
+            // return $teamproject;
+            return response()->json([$teamproject], 200);
+        }
+        return response()->json(["error" => "can't bde added"], 500);
+        
     }
 
     /**

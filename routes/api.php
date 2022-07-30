@@ -62,8 +62,7 @@ Route::resource('/employees', EmployeeController::class);
 
 //middleware authentication
 Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::resource('/employees', EmployeeController::class);
-
+    
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

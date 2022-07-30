@@ -75,8 +75,9 @@ class EmployeeController extends Controller
         if (count($dataObj->kpis) > 0) {
             $kpis = $dataObj->kpis;
             $kpis = array_column($kpis, 'id');
-            $kpis=array_unique($kpis);
+            $kpis= array_unique($kpis);
         }
+        // return $kpis;
         $latest = [];
         $filtered = [];
         if ($kpis) {
@@ -162,6 +163,16 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        return Employee::destroy($id);
+       $destroy= Employee::destroy($id);
+       if ($destroy) { 
+        return response()->json([
+            'response' => "Employee deleted successfully"
+        ], 200);
+    } else {
+        return response()->json([
+            'error' => 'operation failed'
+        ], 500);
+    }
+
     }
 }

@@ -30,8 +30,15 @@ class RoleController extends Controller
         $role->description = $request->input('description');
 
         $role->save();
-        return $role;
-    }
+        if ($role->update()) { //returns a boolean
+            return response()->json([
+                'role' => "Role has been created"
+            ], 200);
+        } else {
+            return response()->json([
+                'role' => 'invalid Data'
+            ], 500);
+        }    }
 
     /**
      * Display the specified resource.
@@ -56,8 +63,15 @@ class RoleController extends Controller
         $roleid = Role::find($id);
         $roleid->update(['role' => $request->input('role'),
         'description'=>$request->input('description')]);
-        return $roleid;
-    }
+        if ($roleid->update()) { //returns a boolean
+            return response()->json([
+                'role' => "Role has been created"
+            ], 200);
+        } else {
+            return response()->json([
+                'role' => 'invalid Data'
+            ], 500);
+        }    }
 
     /**
      * Remove the specified resource from storage.
@@ -67,6 +81,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        return Role::destroy($id);
+        $destroy= Role::destroy($id);
+        if ($destroy) { 
+            return response()->json([
+                'response' => "Role has been deleted"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
     }
 }
