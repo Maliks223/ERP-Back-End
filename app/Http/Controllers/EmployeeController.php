@@ -163,6 +163,16 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        return Employee::destroy($id);
+       $destroy= Employee::destroy($id);
+       if ($destroy) { 
+        return response()->json([
+            'response' => "Employee deleted successfully"
+        ], 200);
+    } else {
+        return response()->json([
+            'error' => 'operation failed'
+        ], 500);
+    }
+
     }
 }

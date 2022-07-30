@@ -28,7 +28,15 @@ class TeamController extends Controller
         $team = new Team();
         $team->name = $request->input('name');
         $team->save();
-        return $team;
+        if ($team->update()) { //returns a boolean
+            return response()->json([
+                'team' => "Team has been created"
+            ], 200);
+        } else {
+            return response()->json([
+                'team' => 'invalid Data'
+            ], 500);
+        }
     }
 
     /**
@@ -55,7 +63,15 @@ class TeamController extends Controller
     {
         $teamid = Team::find($id);
         $teamid->update(['name' => $request->input('name')]);
-        return $teamid;
+        if ($teamid->update()) { //returns a boolean
+            return response()->json([
+                'team' => "Team has been updated"
+            ], 200);
+        } else {
+            return response()->json([
+                'team' => 'could not be updated'
+            ], 500);
+        }
     }
 
     /**
@@ -66,6 +82,15 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        return Team::destroy($id);
+        $deleteteam=Team::destroy($id);
+        if ($deleteteam) { 
+            return response()->json([
+                'response' => "Team has been deleted"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
     }
 }

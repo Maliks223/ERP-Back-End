@@ -31,7 +31,16 @@ class EmployeeProjectController extends Controller
         $role->employee_id = $request->input('employee_id');
         $role->role_id = $request->input('role_id');
         $role->save();
-        return $role;
+        if ($role) { 
+            return response()->json([
+                'response' => "created successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
+
     }
     /**
      * 
@@ -60,7 +69,15 @@ class EmployeeProjectController extends Controller
             'employee_id' => $request->input('employee_id'),
             'project_id' => $request->input('project_id')
         ]);
-        return $roleid;
+        if ($roleid) { 
+            return response()->json([
+                'response' => "updated successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'could not be updated'
+            ], 500);
+        }
     }
 
     /**
@@ -71,6 +88,16 @@ class EmployeeProjectController extends Controller
      */
     public function destroy($id)
     {
-        return employeeProject::destroy($id);
+        $destroy= employeeProject::destroy($id);
+        if ($destroy) { 
+            return response()->json([
+                'response' => "deleted successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
+
     }
 }
