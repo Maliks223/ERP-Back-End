@@ -25,55 +25,74 @@ use App\Http\Controllers\TeamProjectController;
 |
 */
 
-Route::resource('/project', ProjectController::class);
-// Route::resource('/projectreport', ReportController::class);
-Route::resource('/teamproject', TeamProjectController::class);
 
 
+//ALIGORITHIM (THE (MIND LOGIC) OF THE PROJECT)
+//ABU AMER (THE HARDWORKING MINDSET AND FUCKING THE PROBLEMS TO GIVE BIRTH FOR SOLUTIONS)
+//MALIKS (AKBAR DESIGNER MANYAK BL TERI5)
 
 
-// Route::get('/get', [AuthController::class, 'index']);
-// Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
-// });
-Route::post('/register', [AuthController::class, 'register']);
-Route::resource('/project', ProjectController::class);
-Route::resource('/roles', RoleController::class);
-Route::resource('/employeerole', EmployeeRoleController::class);
-// Route::resource('/evalution',EvalutionController::class);
-Route::get('/evalution/{id}',[EvalutionController::class,'index']);
+  //MIDDLWARE AUTHENTICATION
+Route::group(['middleware' => 'auth.jwt'], function () {
 
-Route::post('/evalution',[EvalutionController::class,'store']);
-
-Route::get('/user',[AuthController::class,'getuser']);
-
-
-//user routes
+ //user routes
 Route::get('/users', [AuthController::class, 'get']);
 Route::get('/getAdmin/{id}', [AuthController::class, 'getAdmin']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::resource('/users', AuthController::class);
+Route::get('/user',[AuthController::class,'getuser']);
 
-//teams routes
-Route::resource('/teams', TeamController::class);
-
-//employees routes
+ //employees routes
 Route::resource('/employees', EmployeeController::class);
 
-//middleware authentication
-Route::group(['middleware' => 'auth.jwt'], function () {
+ //teams routes
+Route::resource('/teams', TeamController::class);
+
+ //EMPLOYEE KPI
+Route::resource('employeekpi', EmployeeKpiController::class);
+
+ // KPI
+Route::resource('/kpi', KpiController::class);
+
+ //EVALUTION ROUTES
+Route::get('/evalution/{id}',[EvalutionController::class,'index']);
+Route::post('/evalution',[EvalutionController::class,'store']);
+
+//EMPLOYEE ROLE
+Route::resource('/employeerole', EmployeeRoleController::class);
+
+//PROJECT ROUTES
+Route::resource('/project', ProjectController::class);
+
+//ROLES ROUTES
+Route::resource('/roles', RoleController::class);
+
+//PROJECT
+Route::resource('/project', ProjectController::class);
+
+//TEAM PROJECT
+Route::resource('/teamproject', TeamProjectController::class);
+
 });
+
+ //MIDDLWARE FOR SUPERADMIN REGISTERING ANEW ADMINS 
+ Route::group(['middleware'=>['auth.jwt','SuperAdmin']], function(){
+    //register only for SUPERADMIN
+    Route::post('/register', [AuthController::class, 'register']);
+
+});
+
+
+//OUR TE5BIS AT THE STARTING OF THE PROJECT :)
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+// Route::resource('/projectreport', ReportController::class);
 
-
-Route::resource('employeekpi', EmployeeKpiController::class);
-
-
-Route::resource('/kpi', KpiController::class);
-
-Route::group(['middleware'=>['auth.jwt','SuperAdmin']], function(){
-});
-Route::get('get' , [AuthController::class, 'index']);
+// Route::get('/get', [AuthController::class, 'index']);
+// Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
+// });
+// Route::resource('/evalution',EvalutionController::class);
+// Route::get('get' , [AuthController::class, 'index']);
