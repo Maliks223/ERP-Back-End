@@ -43,8 +43,16 @@ class EmployeeKpiController extends Controller
         $empKpi->rate = $request->input('rate');
         $mydate = $request->input('KPI_date');
         $empKpi->KPI_date = Carbon::parse($mydate);
-        $empKpi->save();
-        return $empKpi;
+        if ($empKpi->save()) {
+            return response()->json([
+               'EmployeeKPI' => 'EmployeeKPI created successfully'
+
+            ], 200);
+        } else {
+            return response()->json([
+                'EmployeeKPI' => 'EmployeeKPI could not be created'
+            ], 500);
+        }
     }
     /**
      * Display the specified resource.
@@ -79,13 +87,12 @@ class EmployeeKpiController extends Controller
             'employee_id' => 'required',
             'kpi_id' => 'required'
         ]);
-        var_dump($employeeKPI);
         $ekpi = employee_kpi::find($employeeKPI)->first();
         if ($ekpi) {
             $ekpi->update($request->all());
             if ($ekpi->save()) {
                 return response()->json([
-                    'data' => $ekpi
+                    'data' => 'EmployeeKPI updated succesfuly'
                 ], 200);
             } else {
                 return response()->json([

@@ -24,18 +24,20 @@ use App\Http\Controllers\TeamProjectController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => 'auth.jwt'], function () {
+
 
 Route::resource('/project', ProjectController::class);
 // Route::resource('/projectreport', ReportController::class);
 Route::resource('/teamproject', TeamProjectController::class);
 
 
-
-
 // Route::get('/get', [AuthController::class, 'index']);
 // Route::prefix('users')->middleware(['auth', 'SuperAdmin'])->group(function () {
 // });
-Route::post('/register', [AuthController::class, 'register']);
 Route::resource('/project', ProjectController::class);
 Route::resource('/roles', RoleController::class);
 Route::resource('/employeerole', EmployeeRoleController::class);
@@ -50,7 +52,8 @@ Route::get('/user',[AuthController::class,'getuser']);
 //user routes
 Route::get('/users', [AuthController::class, 'get']);
 Route::get('/getAdmin/{id}', [AuthController::class, 'getAdmin']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::resource('/users', AuthController::class);
 
@@ -61,7 +64,6 @@ Route::resource('/teams', TeamController::class);
 Route::resource('/employees', EmployeeController::class);
 
 //middleware authentication
-Route::group(['middleware' => 'auth.jwt'], function () {
     
 });
 

@@ -29,8 +29,8 @@ class RoleController extends Controller
         $role->role = $request->input('role');
         $role->description = $request->input('description');
 
-        $role->save();
-        if ($role->update()) { //returns a boolean
+        // $role->save();
+        if ($role->save()) { //returns a boolean
             return response()->json([
                 'role' => "Role has been created"
             ], 200);
@@ -65,7 +65,7 @@ class RoleController extends Controller
         'description'=>$request->input('description')]);
         if ($roleid->update()) { //returns a boolean
             return response()->json([
-                'role' => "Role has been created"
+                'role' => "Role has been updated"
             ], 200);
         } else {
             return response()->json([

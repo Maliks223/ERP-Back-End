@@ -55,7 +55,17 @@ class EmployeeController extends Controller
         $employee->image = $uniqueFileName;
 
         $employee->save();
-        return $employee::with('teams')->get();
+        // return $employee::with('teams')->get();
+        if ($employee) { 
+            return response()->json([
+                'response' => "Employee created successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
+        
     }
 
     /**
@@ -151,7 +161,16 @@ class EmployeeController extends Controller
             $post->team_id = $request->input('team_id');
             $post->update();
         }
-        return response()->json([$post], 200);
+        // return response()->json([$post], 200);
+        if ($post) { 
+            return response()->json([
+                'response' => "Employee updated successfully"
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'operation failed'
+            ], 500);
+        }
     }
 
 

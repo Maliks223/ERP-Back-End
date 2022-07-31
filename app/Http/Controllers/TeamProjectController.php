@@ -43,7 +43,7 @@ class TeamProjectController extends Controller
             $teamproject->Project_id = $request->input('Project_id');
             $teamproject->save();
             // return $teamproject;
-            return response()->json([$teamproject], 200);
+            return response()->json(['Team Project' => 'team project created succesfully'], 200);
         }
         return response()->json(["error" => "can't bde added"], 500);
         
@@ -62,7 +62,7 @@ class TeamProjectController extends Controller
         $teamProject = TeamProject::find($id)::all();
         if ($teamProject) {
             return response()->json([
-                'Team Project' => $teamProject
+                'Team Project' => 'team project created succesfully'
             ], 200);
         } else {
             return response()->json([
@@ -104,7 +104,7 @@ class TeamProjectController extends Controller
             $teamProject->Project_id = $request->Project_id;
             if ($teamProject->update()) {
                 return response()->json([
-                    'data' => $teamProject
+                    'TEAM PROJECT' => 'team project updated'
                 ], 200);
             } else {
                 return response()->json([
