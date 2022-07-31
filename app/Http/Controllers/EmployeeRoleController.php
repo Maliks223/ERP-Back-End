@@ -36,8 +36,7 @@ class EmployeeRoleController extends Controller
         $role->project_id = $request->input('project_id');
         $role->employee_id = $request->input('employee_id');
         $role->role_id = $request->input('role_id');
-        $role->save();
-        if ($role) { 
+        if ($role->save()) { 
             return response()->json([
                 'response' => "created successfully"
             ], 200);
@@ -58,7 +57,16 @@ class EmployeeRoleController extends Controller
     {
         $record = employeeRole::all();
         $record= $record->where('employee_id', $id);
-        return array_values($record->toArray());
+        $recordz= array_values($record->toArray());
+        if ($recordz) { 
+            return response()->json([
+                'response' => $recordz
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'could not be found'
+            ], 500);
+        }
         
     }
 
@@ -84,7 +92,7 @@ class EmployeeRoleController extends Controller
             'employee_id' => $request->input('employee_id'),
             'project_id' => $request->input('project_id')
         ]);
-        if ($roleid) { 
+        if ($roleid->save()) { 
             return response()->json([
                 'response' => "updated successfully"
             ], 200);

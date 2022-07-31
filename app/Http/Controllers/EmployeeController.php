@@ -162,7 +162,7 @@ class EmployeeController extends Controller
             $post->update();
         }
         // return response()->json([$post], 200);
-        if ($post) { 
+        if ($post->save()) { 
             return response()->json([
                 'response' => "Employee updated successfully"
             ], 200);

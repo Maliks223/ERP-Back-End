@@ -30,8 +30,7 @@ class EmployeeProjectController extends Controller
         $role->project_id = $request->input('project_id');
         $role->employee_id = $request->input('employee_id');
         $role->role_id = $request->input('role_id');
-        $role->save();
-        if ($role) { 
+        if ($role->save()) { 
             return response()->json([
                 'response' => "created successfully"
             ], 200);
@@ -69,7 +68,7 @@ class EmployeeProjectController extends Controller
             'employee_id' => $request->input('employee_id'),
             'project_id' => $request->input('project_id')
         ]);
-        if ($roleid) { 
+        if ($roleid->save()) { 
             return response()->json([
                 'response' => "updated successfully"
             ], 200);

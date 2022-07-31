@@ -37,9 +37,8 @@ class ProjectController extends Controller
     {
         $project = new project();
         $project->name = $request->input('name');
-        $project->save();
 
-        if ($project) {
+        if ($project->save()) {
             return response()->json([
                 'data' => $project
             ], 200);

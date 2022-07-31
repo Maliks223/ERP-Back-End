@@ -27,8 +27,7 @@ class TeamController extends Controller
     {
         $team = new Team();
         $team->name = $request->input('name');
-        $team->save();
-        if ($team->update()) { //returns a boolean
+        if ($team->save()) { //returns a boolean
             return response()->json([
                 'team' => "Team has been created"
             ], 200);

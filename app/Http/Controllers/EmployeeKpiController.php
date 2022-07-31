@@ -62,7 +62,17 @@ class EmployeeKpiController extends Controller
      */
     public function show($employeeKPI)
     {
-        return employee_kpi::find($employeeKPI)::with('employees', 'kpis')->get();
+        $employeekpi =employee_kpi::find($employeeKPI)::with('employees', 'kpis')->get();
+        if ($employeekpi) { 
+            return response()->json([
+                'response' => $employeekpi
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'failed to update'
+            ], 500);
+        }
+
     }
 
     /**
@@ -101,7 +111,7 @@ class EmployeeKpiController extends Controller
             }
         }
         return response()->json([
-            'EmployeeKPI' => 'EmployeeKPI could not be found'
+            'EmployeeKPI' => 'EmployeeKPI could not be updated'
         ], 500);
     }
 

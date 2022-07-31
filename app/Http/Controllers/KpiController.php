@@ -43,7 +43,7 @@ class KpiController extends Controller
         $kpi->fill($request->all());
         if ($kpi->save()) {
             return response()->json([
-                'data' => $kpi
+                'data' => 'kpi created successfully'
             ], 200);
         } else {
             return response()->json([
@@ -60,7 +60,16 @@ class KpiController extends Controller
      */
     public function show($kPI)
     {
-        return  kpi::find($kPI);
+        $kpi= kpi::find($kPI);
+        if ($kpi) {
+            return response()->json([
+                'data' => $kpi
+            ], 200);
+        } else {
+            return response()->json([
+                'kpi' => 'kpi could not be found'
+            ], 500);
+        }
     }
 
     /**
@@ -88,7 +97,7 @@ class KpiController extends Controller
             $kpi->update($request->all());
             if ($kpi->save()) {
                 return response()->json([
-                    'data' => $kpi
+                    'data' => 'kpi updated successfully'
                 ], 200);
             } else {
                 return response()->json([
