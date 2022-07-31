@@ -62,7 +62,7 @@ class TeamProjectController extends Controller
         $teamProject = TeamProject::find($id)::all();
         if ($teamProject) {
             return response()->json([
-                'Team Project' => 'team project created succesfully'
+                'data' => $teamProject
             ], 200);
         } else {
             return response()->json([
