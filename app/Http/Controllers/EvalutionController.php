@@ -80,4 +80,21 @@ class EvalutionController extends Controller
     public function destroy($id)
     {
     }
+
+    //this function retuns the number of all employees, projects, and teams
+
+    public function returnCompanyData(Request $request)
+
+    {
+
+    }
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 }

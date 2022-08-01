@@ -27,7 +27,7 @@ use App\Http\Controllers\TeamProjectController;
 Route::post('/login', [AuthController::class, 'login']);
 
 
-Route::group(['middleware' => 'auth.jwt'], function () {
+// Route::group(['middleware' => 'auth.jwt'], function () {
 
 
 Route::resource('/project', ProjectController::class);
@@ -65,7 +65,7 @@ Route::resource('/employees', EmployeeController::class);
 
 //middleware authentication
     
-});
+// });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
